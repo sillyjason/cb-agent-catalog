@@ -128,38 +128,6 @@ class Agent:
 
 
 
-# prep node 
-def prep_node(state: AgentState):
-    
-    tools = provider.get_tools_for(query="get customer previous messages", limit=2)
-    print(f"tools: {tools}")
-    # t = provider.get_tools_for(query="reasoning about a customer's happiness")
-    
-    # print(f"prompt: {p.prompt}")
-    # system_prompt = SystemMessage(content=p.prompt.render(message=state['message']))
-    # print(f"system prompt: {system_prompt.content}")
-    # prep_agent_bot = Agent(agentc_model, p.tools, system=system_prompt.content)
-    
-    prep_agent_bot = Agent(agentc_model, tools)
-    # print(f"prep agent bot: {prep_agent_bot}")
-    # with_tools = chat_model.bind_tools(tools=p.tools)
-    # print(f"with tools: {with_tools}")
-    
-    messages = [
-        SystemMessage(content=prep_prompt), 
-        HumanMessage(content=state['message'])
-    ]
-    
-    response = prep_agent_bot.graph.invoke({"messages": messages})
-    print(f"response from prep_agent_bot: {response}")
-    content = response['messages'][-1].content
-    print(f"content of prep_agent_bot: {content}")
-    
-    return {
-        "sentiment": content
-    }
-
-
 # general support node 
 # general_tools = [retrieve_order_info, get_product_details]
 # general_support_bot = Agent(model, general_tools, system=general_support_prompt)
@@ -167,9 +135,7 @@ def prep_node(state: AgentState):
 def general_support_node(state: AgentState):
     print_bold("\n\nGeneral support agent bot is running...\n\n")
     
-    print("this is where we start")
     tools = provider.get_tools_for(query="For general support agents to identify information relevant for further processing", limit=4)
-    print("hopefully we see this!")
     # p = provider.get_prompt_for(query="Gather general information relevant to this message to pass down for further processing")
     # system_prompt = langchain_core.messages.SystemMessage(content=p.prompt)
 
@@ -316,7 +282,6 @@ def content_finalizer_node(state: AgentState):
     
 # build the graph and add nodes 
 builder = StateGraph(AgentState)
-# builder.add_node("prep", prep_node)
 builder.add_node("general_support", general_support_node)
 # builder.add_node("recommendation", product_recommendation_node)
 # builder.add_node("product_fixes", product_fix_node)
@@ -326,7 +291,6 @@ builder.set_entry_point("general_support")
 
 
 # parallel connections
-# builder.add_edge("prep", "general_support")
 # builder.add_edge("general_support", "recommendation")
 # builder.add_edge("general_support", "product_fixes")
 builder.add_edge("general_support", "refund")

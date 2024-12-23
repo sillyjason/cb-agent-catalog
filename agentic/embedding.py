@@ -1,8 +1,13 @@
-from langchain_openai import OpenAIEmbeddings
+# filepath: /Users/jc/Desktop/OtherTechies/Python_LangChain/agentic_customer_service_with_agentc/agentic/embedding.py
+from sentence_transformers import SentenceTransformer
 
-embeddings_1024 = OpenAIEmbeddings(model="text-embedding-3-large", dimensions=1024)
+# Load the locally downloaded model
+model_path = "./models/all-MiniLM-L12-v2"
+model = SentenceTransformer(model_path)
 
-# generate embedding
+# Generate embedding
 def create_openai_embeddings(input_message):
-    return embeddings_1024.embed_documents([input_message])[0]
-
+    embeddings = model.encode([input_message])[0]
+    # Convert embeddings to a list of floats
+    embeddings_list = embeddings.tolist()
+    return embeddings_list

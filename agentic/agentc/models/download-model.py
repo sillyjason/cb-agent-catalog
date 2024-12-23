@@ -1,14 +1,9 @@
-from transformers import AutoTokenizer, AutoModelForMaskedLM
+# Load model directly
+from transformers import AutoTokenizer, AutoModel
 
-model_name = "multi-qa-mpnet-base-cos-v1"
-
-# Download the model and tokenizer
-# model = AutoModel.from_pretrained(model_name)
-# tokenizer = AutoTokenizer.from_pretrained(model_name)
-
-tokenizer = AutoTokenizer.from_pretrained("sentence-transformers/multi-qa-mpnet-base-cos-v1")
-model = AutoModelForMaskedLM.from_pretrained("sentence-transformers/multi-qa-mpnet-base-cos-v1")
+tokenizer = AutoTokenizer.from_pretrained("sentence-transformers/all-MiniLM-L12-v2")
+model = AutoModel.from_pretrained("sentence-transformers/all-MiniLM-L12-v2")
 
 # Save the model and tokenizer locally
-model.save_pretrained("./models/multi-qa-mpnet-base-cos-v1")
-tokenizer.save_pretrained("./models/multi-qa-mpnet-base-cos-v1")
+model.save_pretrained("./models/all-MiniLM-L12-v2")
+tokenizer.save_pretrained("./models/all-MiniLM-L12-v2")
