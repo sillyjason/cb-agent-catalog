@@ -9,8 +9,7 @@ input: >
       "type": "object",
       "properties": {
         "product_category": { 
-          "type": "string",
-          "enum": ["vacuum", "wash_machine"]
+          "type": "string"
         }
       }
     }
