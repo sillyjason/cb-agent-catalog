@@ -10,7 +10,6 @@ from sharedfunctions.print import print_success, print_error
 load_dotenv()
 
 #get the environment variables
-TOKEN = os.getenv("CAPELLA_API_KEY_TOKEN")
 CB_CONN_STRING = os.getenv("CB_CONN_STRING")
 EVENTING_HOSTNAME = os.getenv("EVENTING_HOSTNAME")
 SEARCH_HOSTNAME = os.getenv("SEARCH_HOSTNAME")
@@ -19,9 +18,6 @@ CB_PASSWORD = os.getenv("CB_PASSWORD")
 APP_NODE_HOSTNAME= os.getenv("APP_NODE_HOSTNAME")
 
 print("start setting up data structures..")
-
-#some shared variables 
-headers = {"Authorization": f"Bearer {TOKEN}"}
 
 
 def create_bucket(bucket_name, ram_quota): 
@@ -70,11 +66,11 @@ def create_collection(bucket_name, scope_name, collection_name):
 
 
 #create bucket main 
-BUCKET_MAIN_ID = create_bucket("main", 2000)
+BUCKET_MAIN_ID = create_bucket("main", 1500)
 
 #create bucket meta & audits
-create_bucket("meta", 100)
-create_bucket("audits", 100)
+create_bucket("meta", 400)
+create_bucket("audits", 500)
 
 if BUCKET_MAIN_ID is not None:
     scope_data_created = create_scope("data", "main") 

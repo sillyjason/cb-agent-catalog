@@ -167,7 +167,9 @@ def prep_node(state: AgentState):
 def general_support_node(state: AgentState):
     print_bold("\n\nGeneral support agent bot is running...\n\n")
     
+    print("this is where we start")
     tools = provider.get_tools_for(query="For general support agents to identify information relevant for further processing", limit=4)
+    print("hopefully we see this!")
     # p = provider.get_prompt_for(query="Gather general information relevant to this message to pass down for further processing")
     # system_prompt = langchain_core.messages.SystemMessage(content=p.prompt)
 

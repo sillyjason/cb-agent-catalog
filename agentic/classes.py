@@ -27,7 +27,7 @@ class ProductCategory(BaseModel):
     """The category of products sold"""
     product_category: str = Field(description="category of the product. Either `vacuum` or `wash_machine`")
     
-    
+
 class RefundIncident(BaseModel):
     """The refund incident created to address customer's refund request"""
     order_id: str = Field(description="the ID of the sales order associated with the refund request")
