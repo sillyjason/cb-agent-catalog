@@ -162,18 +162,24 @@ def prep_node(state: AgentState):
 
 # general support node 
 # general_tools = [retrieve_order_info, get_product_details]
+# general_support_bot = Agent(model, general_tools, system=general_support_prompt)
 
 def general_support_node(state: AgentState):
     print_bold("\n\nGeneral support agent bot is running...\n\n")
     
-    # tools = provider.get_tools_for(query="Gather general information relevant to this message to pass down for further processing", limit=4)
-    p = provider.get_prompt_for(query="Gather general information relevant to this message to pass down for further processing")
-    system_prompt = langchain_core.messages.SystemMessage(content=p.prompt)
+    tools = provider.get_tools_for(query="For general support agents to identify information relevant for further processing", limit=4)
+    # p = provider.get_prompt_for(query="Gather general information relevant to this message to pass down for further processing")
+    # system_prompt = langchain_core.messages.SystemMessage(content=p.prompt)
 
-    general_support_bot = Agent(agentc_model, p.tools, system=general_support_prompt)
+    general_support_bot = Agent(agentc_model, tools, system=general_support_prompt)
 
+    # messages = [
+    #     SystemMessage(content=general_support_prompt), 
+    #     HumanMessage(content=state['message'])
+    # ]
+    
     messages = [
-        SystemMessage(content=system_prompt), 
+        SystemMessage(content=general_support_prompt), 
         HumanMessage(content=state['message'])
     ]
     
@@ -309,7 +315,7 @@ builder = StateGraph(AgentState)
 # builder.add_node("prep", prep_node)
 builder.add_node("general_support", general_support_node)
 builder.add_node("recommendation", product_recommendation_node)
-builder.add_node("product_fixes", product_fix_node)
+# builder.add_node("product_fixes", product_fix_node)
 builder.add_node("refund", refund_node)
 builder.add_node("finalizer", content_finalizer_node)
 builder.set_entry_point("general_support")
@@ -318,10 +324,10 @@ builder.set_entry_point("general_support")
 # parallel connections
 # builder.add_edge("prep", "general_support")
 builder.add_edge("general_support", "recommendation")
-builder.add_edge("general_support", "product_fixes")
+# builder.add_edge("general_support", "product_fixes")
 builder.add_edge("general_support", "refund")
 builder.add_edge("recommendation", "finalizer")
-builder.add_edge("product_fixes", "finalizer")
+# builder.add_edge("product_fixes", "finalizer")
 builder.add_edge("refund", "finalizer")
 
 

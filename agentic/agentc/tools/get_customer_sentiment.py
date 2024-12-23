@@ -2,8 +2,6 @@ from agentc import tool
 from pydantic import BaseModel, Field
 
 
-
-
 @tool
 def get_customer_sentiment(customer_message: str) -> float:
     """get the customer sentiment as a float that counts. It increments when certain positive words are hit, and decrements when certain negative words are hit"""

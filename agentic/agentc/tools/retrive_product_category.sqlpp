@@ -1,14 +1,14 @@
 /*
-name: retrive_product
+name: retrive_product_category
 
 description: >
-    For general support agents to identify information relevant for further processing - retrieve details of a particular product 
+    For general support agents to identify information relevant for further processing - retrieve information of products under a particular category 
 
 input: >
     {
       "type": "object",
       "properties": {
-        "product_id": { "type": "string" }
+        "product_category": { "type": "string" }
       }
     }
 
@@ -22,4 +22,5 @@ SELECT *
 FROM 
  `main`.`data`.`products`
 WHERE 
- meta().id = $product_id
+ category = $product_category
+Limit 5
