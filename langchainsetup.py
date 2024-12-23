@@ -7,7 +7,7 @@ from typing import TypedDict, Annotated, List
 import operator
 from langgraph.checkpoint.sqlite import SqliteSaver
 from langchain_core.messages import AnyMessage, SystemMessage, HumanMessage, ToolMessage
-from agentic.prompts import general_support_prompt, product_fix_prompt, refund_policy_prompt, product_recommendation_prompt, content_finalizer_prompt, prep_prompt
+from agentic.prompts import general_support_prompt, refund_policy_prompt, content_finalizer_prompt
 from langchain_core.output_parsers import JsonOutputParser
 from agentic.parser import parse_message
 import time 
@@ -174,48 +174,6 @@ def general_support_node(state: AgentState):
     return state_to_update
 
 
-# product recommendation node 
-product_recommendation_tools = [get_category_products]
-product_recommendation_bot = Agent(agentc_model, product_recommendation_tools, system=product_recommendation_prompt)
-
-def product_recommendation_node(state: AgentState): 
-    print_bold("\n\nProduct recommendation agent bot is running...\n\n")
-    
-    messages = [
-        SystemMessage(content=general_support_prompt), 
-        HumanMessage(content=state['message'])
-    ]
-    
-    # response = model.with_structured_output(GeneralSupportOutput).invoke(messages)
-    response = product_recommendation_bot.graph.invoke({"messages": messages})
-    content = response['messages'][-1].content
-    
-    return {
-        "product_recommendation": content
-    }
-
-
-# product fix prompt 
-product_fix_tools = [get_policies]
-product_fix_bot = Agent(agentc_model, product_fix_tools, system=product_fix_prompt)
-
-def product_fix_node(state: AgentState): 
-    print_bold("\n\nProduct fix agent bot is running...\n\n")
-    
-    messages = [
-        SystemMessage(content=product_fix_prompt), 
-        HumanMessage(content=state['message'])
-    ]
-    
-    # response = model.with_structured_output(GeneralSupportOutput).invoke(messages)
-    response = product_fix_bot.graph.invoke({"messages": messages})
-    content = response['messages'][-1].content
-    
-    return {
-        "product_fix": content
-    }
-
-
 # refund node 
 refund_tools = [get_policies, calculate_refund_eligibility]
 refund_bot = Agent(agentc_model, refund_tools, system=refund_policy_prompt)
@@ -283,19 +241,13 @@ def content_finalizer_node(state: AgentState):
 # build the graph and add nodes 
 builder = StateGraph(AgentState)
 builder.add_node("general_support", general_support_node)
-# builder.add_node("recommendation", product_recommendation_node)
-# builder.add_node("product_fixes", product_fix_node)
 builder.add_node("refund", refund_node)
 builder.add_node("finalizer", content_finalizer_node)
 builder.set_entry_point("general_support")
 
 
 # parallel connections
-# builder.add_edge("general_support", "recommendation")
-# builder.add_edge("general_support", "product_fixes")
 builder.add_edge("general_support", "refund")
-# builder.add_edge("recommendation", "finalizer")
-# builder.add_edge("product_fixes", "finalizer")
 builder.add_edge("refund", "finalizer")
 
 
