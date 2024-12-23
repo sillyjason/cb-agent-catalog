@@ -1,0 +1,25 @@
+/*
+name: retrive_order
+
+description: >
+    Retrieve the information of a specific order. 
+
+input: >
+    {
+      "type": "object",
+      "properties": {
+        "order_id": { "type": "string" }
+      }
+    }
+
+secrets:
+    - couchbase:
+        conn_string: CB_CONN_STRING
+        username: CB_USERNAME
+        password: CB_PASSWORD
+*/
+SELECT *
+FROM 
+ `main`.`data`.`orders`
+WHERE 
+ meta().id = $order_id

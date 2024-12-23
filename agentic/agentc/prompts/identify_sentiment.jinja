@@ -1,0 +1,29 @@
+---
+record_kind: jinja_prompt
+
+name: identify_sentiment
+
+description: >
+    Identify customer's sentiment from the message
+
+annotations:
+  darkhumour: "yes"
+
+tools:
+  # Tools can be specified using the same parameters found in Provider.get_tools_for.
+  # For instance, we can condition on the tool name...
+  - name: "get_customer_sentiment"
+
+
+---
+Goal:
+Your goal is to find customer's sentiment from their message.
+
+Customer message:
+{{ message }}
+
+Examples:
+...
+
+Instructions:
+There are tools to quantify customer sentiments. Use them where necessary.

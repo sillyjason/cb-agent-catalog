@@ -1,0 +1,25 @@
+/*
+name: retrive_product
+
+description: >
+    Retrieve the information of a specific product. 
+
+input: >
+    {
+      "type": "object",
+      "properties": {
+        "product_id": { "type": "string" }
+      }
+    }
+
+secrets:
+    - couchbase:
+        conn_string: CB_CONN_STRING
+        username: CB_USERNAME
+        password: CB_PASSWORD
+*/
+SELECT *
+FROM 
+ `main`.`data`.`products`
+WHERE 
+ meta().id = $product_id

@@ -1,0 +1,27 @@
+/*
+name: find_previous_messages
+
+description: >
+    Find the latest messages sent by the customer. 
+
+input: >
+    {
+      "type": "object",
+      "properties": {
+        "customer": { "type": "string" }
+      }
+    }
+
+secrets:
+    - couchbase:
+        conn_string: CB_CONN_STRING
+        username: CB_USERNAME
+        password: CB_PASSWORD
+*/
+SELECT 
+  message, time
+FROM 
+  `main`.`data`.`messages`
+ORDER BY 
+  time DESC
+LIMIT 5
