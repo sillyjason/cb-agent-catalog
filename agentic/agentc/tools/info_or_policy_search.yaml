@@ -10,7 +10,7 @@ name: info_or_policy_search
 # A description for the function bound to this tool.
 # This field is mandatory, and will be used in the docstring of a Python function.
 description: >
-  For general support agents to identify information relevant for further processing - find relevant product information or policies.
+  For general support agents to identify information relevant for further processing - find relevant information for product details, problem fixes, or any inquiry that touch on policies
 
 # The inputs used to build a comparable representation for a semantic search.
 # Inputs are described using a JSON object that follows the JSON schema standard.
@@ -66,7 +66,7 @@ vector_search:
   # The embedding model used to generate the vector_field.
   # This embedding model field value is directly passed to sentence transformers.
   # In the future, we will add support for other types of embedding models.
-  embedding_model: text-embedding-3-large
+  embedding_model: multi-qa-mpnet-base-cos-v1
 
   # The number of candidates (i.e., the K value) to request for when performing a vector top-k search.
   # This field is optional, and defaults to k=3 if not specified.

@@ -196,6 +196,8 @@ def general_support_node(state: AgentState):
     for pretty_msg in messages_dict:
         is_tool_message, function_name, json_data = parse_message(pretty_msg)
         
+        print(f"json_data: {json_data}")
+        
         if is_tool_message:
             if function_name == "retrieve_order_info":
                 state_to_update['order_id'] = json_data['order_id'] if json_data else None
