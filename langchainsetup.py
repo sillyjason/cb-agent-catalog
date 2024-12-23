@@ -314,7 +314,7 @@ def content_finalizer_node(state: AgentState):
 builder = StateGraph(AgentState)
 # builder.add_node("prep", prep_node)
 builder.add_node("general_support", general_support_node)
-builder.add_node("recommendation", product_recommendation_node)
+# builder.add_node("recommendation", product_recommendation_node)
 # builder.add_node("product_fixes", product_fix_node)
 builder.add_node("refund", refund_node)
 builder.add_node("finalizer", content_finalizer_node)
@@ -323,10 +323,10 @@ builder.set_entry_point("general_support")
 
 # parallel connections
 # builder.add_edge("prep", "general_support")
-builder.add_edge("general_support", "recommendation")
+# builder.add_edge("general_support", "recommendation")
 # builder.add_edge("general_support", "product_fixes")
 builder.add_edge("general_support", "refund")
-builder.add_edge("recommendation", "finalizer")
+# builder.add_edge("recommendation", "finalizer")
 # builder.add_edge("product_fixes", "finalizer")
 builder.add_edge("refund", "finalizer")
 
