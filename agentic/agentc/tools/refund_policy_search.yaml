@@ -5,12 +5,12 @@ record_kind: semantic_search
 
 # The name of the tool must be a valid Python identifier (e.g., no spaces).
 # This field is mandatory, and will be used as the name of a Python function.
-name: info_or_policy_search
+name: refund_policy_search
 
 # A description for the function bound to this tool.
 # This field is mandatory, and will be used in the docstring of a Python function.
 description: >
-  For general support agents to identify information relevant for further processing - find relevant information for product details or problem fixes
+  For refund agent to handle any customer refund request - find relevant policies to process refund request
 
 # The inputs used to build a comparable representation for a semantic search.
 # Inputs are described using a JSON object that follows the JSON schema standard.
