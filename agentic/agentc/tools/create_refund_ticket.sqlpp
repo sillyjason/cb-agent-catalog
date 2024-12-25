@@ -104,8 +104,6 @@ def create_refund_ticket(refund_obj: RefundIncident) -> dict:
         
         
     except Exception as e:
-        # LangChain AgentExecutor somehow restart the chain, no solution is found. So using insert ops
-        # to stop the recreation. The error here is intended.
         print("exception:", e)
         
     return {
