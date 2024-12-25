@@ -12,6 +12,8 @@ import couchbase.subdocument as SD
 from sharedfunctions.print import print_success
 from pydantic import BaseModel, Field
 import datetime
+from agentc import tool
+
 
 load_dotenv()
 
