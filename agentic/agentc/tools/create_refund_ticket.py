@@ -6,10 +6,8 @@ import uuid
 from couchbase.cluster import Cluster
 from couchbase.options import ClusterOptions
 from couchbase.auth import PasswordAuthenticator
-from datetime import timedelta
 import os 
 import couchbase.subdocument as SD
-from sharedfunctions.print import print_success
 from pydantic import BaseModel, Field
 import datetime
 from agentc import tool
@@ -20,7 +18,7 @@ load_dotenv()
 # Couchbase connection
 auth = PasswordAuthenticator(os.getenv("CB_USERNAME"), os.getenv("CB_PASSWORD"))
 cluster = Cluster(f'couchbase://{os.getenv("CB_CONN_STRING")}', ClusterOptions(auth))
-cluster.wait_until_ready(timedelta(seconds=5))
+cluster.wait_until_ready(datetime.timedelta(seconds=5))
 print("Couchbase setup complete")
 
 
