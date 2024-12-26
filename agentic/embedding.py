@@ -2,11 +2,11 @@
 from sentence_transformers import SentenceTransformer
 
 # Load the locally downloaded model
-model_path = "./models/all-MiniLM-L12-v2"
+model_path = "/Users/jc/Desktop/OtherTechies/Python_LangChain/agentic_customer_service_with_agentc/models/all-MiniLM-L12-v2"
 model = SentenceTransformer(model_path)
 
 # Generate embedding
-def create_openai_embeddings(input_message):
+def create_embeddings(input_message):
     embeddings = model.encode([input_message])[0]
     # Convert embeddings to a list of floats
     embeddings_list = embeddings.tolist()

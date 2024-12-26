@@ -1,0 +1,29 @@
+/*
+name: get_products_details
+
+description: >
+    For general support agents to identify information relevant for further processing - retrieve details of a particular product or a set of products
+
+input: >
+    {
+      "type": "object",
+      "properties": {
+        "skus": { 
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    }
+
+secrets:
+    - couchbase:
+        conn_string: CB_CONN_STRING
+        username: CB_USERNAME
+        password: CB_PASSWORD
+*/
+
+SELECT *
+FROM 
+ `main`.`data`.`products`
+WHERE 
+ `sku` IN $skus 

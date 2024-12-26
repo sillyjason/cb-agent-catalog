@@ -1,17 +1,23 @@
 from flask import Flask, render_template, request, jsonify
-from flask_socketio import SocketIO, emit
+from flask_socketio import SocketIO
 from dotenv import load_dotenv
 import datetime
-from couchbaseops import insert_doc, run_query, mutliple_subdoc_upsert, mutliple_subdoc_upsert
+from couchbaseops import insert_doc, mutliple_subdoc_upsert, mutliple_subdoc_upsert
 from agentic.metadata_tag import tag_metadata
 from langchainsetup import run_agent_langgraph
 from sharedfunctions.print import print_error
+from langchain.memory import ChatMessageHistory
+from langchainsetup import generate_query_transform_prompt
 
-
+# load the environment variables
 load_dotenv()
 
+# initiate the flask app and socketio
 app = Flask(__name__)
 socketio = SocketIO(app)
+
+# initiate the chat history in memory
+demo_ephemeral_chat_history = ChatMessageHistory()
 
 
 @app.route('/')
@@ -23,15 +29,27 @@ def index():
 def handle_message(msg_to_process):
     print_error(f'\n\nNew customer message! "{msg_to_process}"\n\n')
     
+    
+    # add user message to chat history
+    demo_ephemeral_chat_history.add_user_message(msg_to_process['message'])
+    
+    # incorporating the chat history together with the new questions to generate an independent prompt
+    transformed_query = generate_query_transform_prompt(demo_ephemeral_chat_history.messages)
+    print(f"Generated query: {transformed_query}")
+    
     # insert into message collection 
     doc_to_insert = msg_to_process
     doc_to_insert["source"] = "web"
+    doc_to_insert['transformed_query'] = transformed_query
     doc_to_insert["time"] = datetime.datetime.now().isoformat()
     message_id = insert_doc("main", "data", "messages", doc_to_insert)
 
     # run agent 
-    response, run_id, run_url = run_agent_langgraph(msg_to_process['message'])
+    response, run_id, run_url = run_agent_langgraph(transformed_query)
     final_reply = response['final_response']
+    
+    # update chat history with the response
+    demo_ephemeral_chat_history.add_ai_message(final_reply)
     
     run_id = str(run_id)
     
@@ -60,15 +78,6 @@ def handle_message(msg_to_process):
         "run_id": run_id,
         "run_url": run_url
     })
-    
-
-# @app.route('/run_agents', methods=['POST'])
-# def run_agents():
-#     data = request.get_json()
-#     content = data["content"]
-#     message_id = data["message_id"]
-#     reply = run_agent(content, message_id)
-#     return jsonify({"response": reply})
 
 
 @app.route('/metadata_tag', methods=['POST'])
@@ -110,54 +119,5 @@ def messages():
     return render_template('messages.html')
 
 
-@socketio.on('init_messages')
-def init_messages():
-    query = """
-        SELECT * 
-        FROM `main`.`data`.`messages`
-        ORDER BY time DESC
-    """
-    result = run_query(query)
-    
-    results = []
-    for row in result: 
-        print(f'found row: {row}')
-        results.append(row)
-        emit('new_messages', results)
-    
-    return 
-
-
-@socketio.on('init_refund_tickets')
-def init_refund_tickets():
-    query = """
-        SELECT meta() as metadata, * 
-        FROM `main`.`data`.`refund_tickets`
-        ORDER BY time DESC
-    """
-    result = run_query(query)
-    
-    results = []
-    for row in result: 
-        results.append(row)
-        emit('new_tickets', results)
-    
-    return 
-
-
-@socketio.on('approve_refund_ticket')
-def approve_refund_ticket(data):
-    refund_amount = data.get('refund_amount')
-    refund_ticket_id = data.get('refund_ticket_id')
-    
-    mutliple_subdoc_upsert("main", "data", "refund_tickets", refund_ticket_id, {
-        'refund_amount': refund_amount,
-        'approved': True
-    })
-    
-    return 
-
-
 if __name__ == '__main__':
     socketio.run(app, host='0.0.0.0', port=5001)
-    

@@ -72,16 +72,17 @@ BUCKET_MAIN_ID = create_bucket("main", 1500)
 create_bucket("meta", 400)
 create_bucket("audits", 500)
 
+
 if BUCKET_MAIN_ID is not None:
     scope_data_created = create_scope("data", "main") 
     
     if scope_data_created:
         create_collection("main", "data", "messages")
         create_collection("main", "data", "message_responses")
-        create_collection("main", "data", "orders")
-        create_collection("main", "data", "policies")
         create_collection("main", "data", "products")
-        create_collection("main", "data", "refund_tickets")
+        create_collection("main", "data", "tickets")
+        create_collection("main", "data", "product_faqs")
+        create_collection("main", "data", "defects")
     
 print_success("Done setting up data structures..")
 
@@ -102,7 +103,6 @@ try:
     
 except Exception as e:
     print_error(f"Error updating endpoint in index.html: {str(e)}")
-
 
 
 # setup Eventing functions 
@@ -132,33 +132,25 @@ import_function("process_message")
 
 
 # setup fts index
-def import_fts_index():
+def import_fts_index(index_name):
     print(f"Importing fts index...")
     
     try:
         url = f"http://{SEARCH_HOSTNAME}:8094/api/bucket/main/scope/data/index/data_fts"
-        with open(f'./static/fts-index.json', 'r') as file:
+        with open(f'./static/fts/{index_name}.json', 'r') as file:
             data = json.load(file)
             requests.put(url, auth=(CB_USERNAME, CB_PASSWORD), json=data)
-            print_success('fts index imported successfully') 
+            print_success(f'fts index {index_name} imported successfully') 
 
     except Exception as e:
         print_error(f"Error importing fts index: {str(e)}")
 
-import_fts_index()
+import_fts_index("defects-fts")
+
 
 
 # create indexes 
-def create_primary_index(bucket_name, scope_name, collection_name):
-    run_query(f"CREATE PRIMARY INDEX ON `{bucket_name}`.`{scope_name}`.`{collection_name}`")
-    
-
-create_primary_index("main", "data", "policies")
-create_primary_index("main", "data", "orders")
-create_primary_index("main", "data", "products")
-create_primary_index("main", "data", "messages")
-create_primary_index("main", "data", "message_responses")
-create_primary_index("main", "data", "refund_tickets")
-
+run_query("CREATE INDEX `ticket_product_id` on `main`.`data`.`tickets`(`related_product`)")
+run_query("CREATE INDEX `product_sku` on `main`.`data`.`products`(`sku`)")
 
 print_success("setup complete.")

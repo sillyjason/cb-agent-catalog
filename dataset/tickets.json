@@ -1,0 +1,202 @@
+[
+    {
+        "date": "2023-10-01",
+        "ticket_id": "TCKT-0001",
+        "summary": "Issue with Microcontroller ATmega328P",
+        "channel": "email",
+        "details": "The microcontroller ATmega328P I purchased is not functioning as expected. It seems to have issues with the flash memory.",
+        "related_product": "IC-001",
+        "status": "Active",
+        "resolved_date": null
+    },
+    {
+        "date": "2023-10-02",
+        "ticket_id": "TCKT-0002",
+        "summary": "Operational Amplifier LM358 not working",
+        "channel": "website",
+        "details": "I am experiencing issues with the LM358 operational amplifier. It is not providing the expected amplification.",
+        "related_product": "IC-001",
+        "status": "Resolved",
+        "resolved_date": "2023-10-05"
+    },
+    {
+        "date": "2023-10-03",
+        "ticket_id": "TCKT-0003",
+        "summary": "NPN Transistor 2N2222 overheating",
+        "channel": "email",
+        "details": "The 2N2222 transistor I bought is overheating even under low power conditions. Please advise.",
+        "related_product": "IC-005",
+        "status": "Active",
+        "resolved_date": null
+    },
+    {
+        "date": "2023-10-04",
+        "ticket_id": "TCKT-0004",
+        "summary": "Red LED 5mm not lighting up",
+        "channel": "website",
+        "details": "The 5mm red LED I purchased is not lighting up when connected to a power source. Please help.",
+        "related_product": "IC-001",
+        "status": "Resolved",
+        "resolved_date": "2023-10-06"
+    },
+    {
+        "date": "2023-10-05",
+        "ticket_id": "TCKT-0005",
+        "summary": "Temperature Sensor LM35 inaccurate readings",
+        "channel": "email",
+        "details": "The LM35 temperature sensor is giving inaccurate readings. The temperature values are fluctuating significantly.",
+        "related_product": "IC-005",
+        "status": "Active",
+        "resolved_date": null
+    },
+    {
+        "date": "2023-10-06",
+        "ticket_id": "TCKT-0006",
+        "summary": "Power MOSFET IRF540N failure",
+        "channel": "website",
+        "details": "The IRF540N power MOSFET failed during operation. It seems to have shorted internally.",
+        "related_product": "IC-006",
+        "status": "Resolved",
+        "resolved_date": "2023-10-08"
+    },
+    {
+        "date": "2023-10-07",
+        "ticket_id": "TCKT-0007",
+        "summary": "EEPROM 24LC256 data corruption",
+        "channel": "email",
+        "details": "The EEPROM 24LC256 is experiencing data corruption issues. Data written to the memory is not being retained.",
+        "related_product": "IC-005",
+        "status": "Active",
+        "resolved_date": null
+    },
+    {
+        "date": "2023-10-08",
+        "ticket_id": "TCKT-0008",
+        "summary": "Photodiode BPW34 low sensitivity",
+        "channel": "website",
+        "details": "The BPW34 photodiode is showing low sensitivity to light. It is not responding as expected.",
+        "related_product": "IC-001",
+        "status": "Resolved",
+        "resolved_date": "2023-10-10"
+    },
+    {
+        "date": "2023-10-09",
+        "ticket_id": "TCKT-0009",
+        "summary": "Pressure Sensor MPX5700AP calibration issue",
+        "channel": "email",
+        "details": "The MPX5700AP pressure sensor is not calibrating correctly. The output voltage is not proportional to the applied pressure.",
+        "related_product": "IC-009",
+        "status": "Active",
+        "resolved_date": null
+    },
+    {
+        "date": "2023-10-10",
+        "ticket_id": "TCKT-0010",
+        "summary": "IGBT IRG4BC30KD high voltage drop",
+        "channel": "website",
+        "details": "The IRG4BC30KD IGBT is showing a high voltage drop during operation. It is not performing as specified.",
+        "related_product": "IC-002",
+        "status": "Resolved",
+        "resolved_date": "2023-10-12"
+    },
+    {
+        "date": "2023-10-11",
+        "ticket_id": "TCKT-0011",
+        "summary": "Microcontroller ATmega328P programming issue",
+        "channel": "email",
+        "details": "I am unable to program the ATmega328P microcontroller. The device is not responding to the programmer.",
+        "related_product": "IC-001",
+        "status": "Active",
+        "resolved_date": null
+    },
+    {
+        "date": "2023-10-12",
+        "ticket_id": "TCKT-0012",
+        "summary": "Operational Amplifier LM358 noise issue",
+        "channel": "website",
+        "details": "The LM358 operational amplifier is introducing a lot of noise into my circuit. Please advise on how to resolve this.",
+        "related_product": "IC-002",
+        "status": "Resolved",
+        "resolved_date": "2023-10-14"
+    },
+    {
+        "date": "2023-10-13",
+        "ticket_id": "TCKT-0013",
+        "summary": "NPN Transistor 2N2222 low gain",
+        "channel": "email",
+        "details": "The 2N2222 transistor I received has a very low gain. It is not amplifying the signal as expected.",
+        "related_product": "IC-003",
+        "status": "Active",
+        "resolved_date": null
+    },
+    {
+        "date": "2023-10-14",
+        "ticket_id": "TCKT-0014",
+        "summary": "Red LED 5mm dim light",
+        "channel": "website",
+        "details": "The 5mm red LED is emitting a very dim light. It is not as bright as specified.",
+        "related_product": "IC-005",
+        "status": "Resolved",
+        "resolved_date": "2023-10-16"
+    },
+    {
+        "date": "2023-10-15",
+        "ticket_id": "TCKT-0015",
+        "summary": "Temperature Sensor LM35 slow response",
+        "channel": "email",
+        "details": "The LM35 temperature sensor has a very slow response time. It takes too long to register temperature changes.",
+        "related_product": "IC-005",
+        "status": "Active",
+        "resolved_date": null
+    },
+    {
+        "date": "2023-10-16",
+        "ticket_id": "TCKT-0016",
+        "summary": "Power MOSFET IRF540N gate leakage",
+        "channel": "website",
+        "details": "The IRF540N power MOSFET is showing significant gate leakage. It is affecting the performance of my circuit.",
+        "related_product": "IC-006",
+        "status": "Resolved",
+        "resolved_date": "2023-10-18"
+    },
+    {
+        "date": "2023-10-17",
+        "ticket_id": "TCKT-0017",
+        "summary": "EEPROM 24LC256 write failure",
+        "channel": "email",
+        "details": "The EEPROM 24LC256 is failing to write data. The write operations are not being completed successfully.",
+        "related_product": "IC-007",
+        "status": "Active",
+        "resolved_date": null
+    },
+    {
+        "date": "2023-10-18",
+        "ticket_id": "TCKT-0018",
+        "summary": "Photodiode BPW34 dark current",
+        "channel": "website",
+        "details": "The BPW34 photodiode has a high dark current. It is affecting the accuracy of my measurements.",
+        "related_product": "IC-008",
+        "status": "Resolved",
+        "resolved_date": "2023-10-20"
+    },
+    {
+        "date": "2023-10-19",
+        "ticket_id": "TCKT-0019",
+        "summary": "Pressure Sensor MPX5700AP drift",
+        "channel": "email",
+        "details": "The MPX5700AP pressure sensor is showing significant drift over time. The readings are not stable.",
+        "related_product": "IC-009",
+        "status": "Active",
+        "resolved_date": null
+    },
+    {
+        "date": "2023-10-20",
+        "ticket_id": "TCKT-0020",
+        "summary": "IGBT IRG4BC30KD switching loss",
+        "channel": "website",
+        "details": "The IRG4BC30KD IGBT is experiencing high switching losses. It is not performing efficiently in my application.",
+        "related_product": "IC-010",
+        "status": "Resolved",
+        "resolved_date": "2023-10-22"
+    }
+]

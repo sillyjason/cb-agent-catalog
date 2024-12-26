@@ -1,13 +1,12 @@
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
-from agentic.tools import retrieve_order_info, get_product_details, get_policies, get_category_products, create_refund_ticket, calculate_refund_eligibility
 from langgraph.graph import StateGraph, END
 from typing import TypedDict, Annotated, List
 import operator
 from langgraph.checkpoint.sqlite import SqliteSaver
 from langchain_core.messages import AnyMessage, SystemMessage, HumanMessage, ToolMessage
-from agentic.prompts import general_support_prompt, refund_policy_prompt, content_finalizer_prompt
+from agentic.prompts import general_support_prompt, content_finalizer_prompt
 from langchain_core.output_parsers import JsonOutputParser
 from agentic.parser import parse_message
 import time 
@@ -20,6 +19,8 @@ import langchain_core.tools
 import uuid
 import os 
 from langchain_core.runnables import RunnableConfig
+import json 
+
 
 # load the environment variables
 load_dotenv()
@@ -54,21 +55,13 @@ thread_id = str(int(time.time()))
 
 # agent state and agent 
 class AgentState(TypedDict):
-    sentiment: float
     message: str
-    policy: str
-    product_recommendation: str 
-    product_fix: str 
-    draft: str 
     messages: Annotated[list[AnyMessage], operator.add]
     
-    refund_eligibility: str 
-    refund_digest: dict
+    products: list
+    defects: list
     
-    order_id: str 
-    order_data: dict 
-    order_date: str
-    product_id: str 
+    tickets: list 
     
     final_response: str 
     
@@ -113,11 +106,11 @@ class Agent:
                 
                 function_args = t["args"]
                 
-                if tool_name == "calculate_refund_eligibility":
-                    current_states = graph.get_state(config={"configurable": {"thread_id": thread_id}}).values 
+                # if tool_name == "calculate_refund_eligibility":
+                #     current_states = graph.get_state(config={"configurable": {"thread_id": thread_id}}).values 
                     
-                    if "order_date" in current_states and current_states["order_date"]:
-                        function_args["order_date"] = current_states["order_date"]
+                #     if "order_date" in current_states and current_states["order_date"]:
+                #         function_args["order_date"] = current_states["order_date"]
                 
                 result = self.tools[tool_name].invoke(function_args)
                 print_success(f"Function call completed with {tool_name}. Result: {result}")
@@ -129,9 +122,6 @@ class Agent:
 
 
 # general support node 
-# general_tools = [retrieve_order_info, get_product_details]
-# general_support_bot = Agent(model, general_tools, system=general_support_prompt)
-
 def general_support_node(state: AgentState):
     print_bold("\n\nGeneral support agent bot is running...\n\n")
     
@@ -174,58 +164,23 @@ def general_support_node(state: AgentState):
     return state_to_update
 
 
-# refund node 
-refund_tools = [get_policies, calculate_refund_eligibility]
-refund_bot = Agent(agentc_model, refund_tools, system=refund_policy_prompt)
-
-def refund_node(state: AgentState): 
-    print_bold("\n\nRefund agent bot is running...\n\n")
-    
-    messages = [
-        SystemMessage(content=refund_policy_prompt), 
-        HumanMessage(content=state['message'])
-    ]
-    
-    # response = model.with_structured_output(GeneralSupportOutput).invoke(messages)
-    response = refund_bot.graph.invoke({"messages": messages})
-    content = response['messages'][-1].content
-    
-    messages_dict = [message.pretty_repr() for message in response['messages']]
-    
-    state_to_update = { "refund_eligibility": content }
-    
-    for pretty_msg in messages_dict:
-        # parse the message
-        is_tool_message, function_name, json_data = parse_message(pretty_msg)
-        
-        if is_tool_message:
-            if function_name == "calculate_refund_eligibility":
-                state_to_update['refund_digest'] = json_data
-    
-    return state_to_update
-
-
 
 # final reflection node
-finalizer_tools = [create_refund_ticket]
-finalizer_bot = Agent(agentc_model, finalizer_tools, system=content_finalizer_prompt)
-
 def content_finalizer_node(state: AgentState):
     print_bold("\n\nFinalization agent is consolidating and working on final response...\n\n")
     
     print(f"final agent state: {state}")
+    
+    tools = provider.get_tools_for(name="get_products_details")
+    finalizer_bot = Agent(agentc_model, tools, system=content_finalizer_prompt)
       
-    draft = state.get("") or ""
     message = state.get("message") or ""
-    product_recommendation = state.get("product_recommendation") or ""
-    product_fix = state.get("product_fix") or ""
-    refund_eligibility = state.get("refund_eligibility") or ""
       
-    assembled_information = "\n\n".join([product_recommendation, product_fix, refund_eligibility])
+    information_passed_down = json.dumps(state)
     
     messages = [
         SystemMessage(
-            content=content_finalizer_prompt.format(assembled_information=assembled_information, draft=draft)
+            content=content_finalizer_prompt.format(information_passed_down=information_passed_down)
         ),
         HumanMessage(content=message)
     ]
@@ -241,15 +196,12 @@ def content_finalizer_node(state: AgentState):
 # build the graph and add nodes 
 builder = StateGraph(AgentState)
 builder.add_node("general_support", general_support_node)
-builder.add_node("refund", refund_node)
 builder.add_node("finalizer", content_finalizer_node)
 builder.set_entry_point("general_support")
-
 
 # parallel connections
 builder.add_edge("general_support", "refund")
 builder.add_edge("refund", "finalizer")
-
 
 # add memory and complie graph
 memory = SqliteSaver.from_conn_string(":memory:")
@@ -275,3 +227,23 @@ def run_agent_langgraph(message):
         run = langsmith_client.read_run(run_id)
         
         return response, run_id, run.url
+
+
+
+# function to transform the query based on message history
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
+
+query_transform_prompt = ChatPromptTemplate.from_messages(
+    [
+        MessagesPlaceholder(variable_name="messages"),
+        (
+            "user",
+            "Given the above conversation, generate a search query to look up in order to get information relevant to the conversation. Only respond with the query, nothing else.",
+        ),
+    ]
+)
+ 
+query_transformation_chain = query_transform_prompt | model
+
+def generate_query_transform_prompt(messages):
+    return query_transformation_chain.invoke({"messages": messages}).content 

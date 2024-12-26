@@ -1,0 +1,30 @@
+/*
+name: get_tickets_by_sku
+
+description: >
+    For general support agents to identify information relevant for further processing - summarize customer ticketks ordered by SKU
+
+input: >
+    {
+      "type": "object",
+      "properties": {
+        "year": {  "type": "number" },
+        ""
+      }
+    }
+
+secrets:
+    - couchbase:
+        conn_string: CB_CONN_STRING
+        username: CB_USERNAME
+        password: CB_PASSWORD
+*/
+
+SELECT related_product,
+       ARRAY_AGG(details) AS concatenated_details,
+       COUNT(*) AS ticket_count
+FROM `main`.`data`.`tickets`
+WHERE DATE_PART_STR(date, "year") = $year
+GROUP BY related_product
+ORDER BY ticket_count DESC
+Limit 2;

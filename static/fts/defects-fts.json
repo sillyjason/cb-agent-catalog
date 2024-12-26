@@ -1,6 +1,6 @@
 {
   "type": "fulltext-index",
-  "name": "data_fts",
+  "name": "defects-fts",
   "sourceType": "gocbcore",
   "sourceName": "main",
   "planParams": {
@@ -29,32 +29,49 @@
       "store_dynamic": false,
       "type_field": "_type",
       "types": {
-        "data.policies": {
-          "dynamic": true,
+        "data.defects": {
+          "dynamic": false,
           "enabled": true,
           "properties": {
-            "embedding": {
+            "description": {
               "dynamic": false,
               "enabled": true,
               "fields": [
                 {
-                  "dims": 1024,
+                  "docvalues": true,
+                  "include_in_all": true,
+                  "include_term_vectors": true,
                   "index": true,
-                  "name": "embedding",
+                  "name": "description",
+                  "store": true,
+                  "type": "text"
+                }
+              ]
+            },
+            "description_embedding": {
+              "dynamic": false,
+              "enabled": true,
+              "fields": [
+                {
+                  "dims": 384,
+                  "index": true,
+                  "name": "description_embedding",
                   "similarity": "l2_norm",
                   "type": "vector",
                   "vector_index_optimized_for": "recall"
                 }
               ]
             },
-            "text": {
+            "issue_id": {
               "dynamic": false,
               "enabled": true,
               "fields": [
                 {
-                  "analyzer": "en",
+                  "docvalues": true,
+                  "include_in_all": true,
+                  "include_term_vectors": true,
                   "index": true,
-                  "name": "text",
+                  "name": "issue_id",
                   "store": true,
                   "type": "text"
                 }

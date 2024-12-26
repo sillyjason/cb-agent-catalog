@@ -1,7 +1,7 @@
 from langchain.tools import tool
 from agentic.classes import ProductIDs, OrdertId, ProductCategory, RefundIncident, RefundEligibilityMaths
 from couchbaseops import get_doc, cluster, cb_vector_search, insert_doc, subdocument_insert
-from agentic.embedding import create_openai_embeddings
+from agentic.embedding import create_embeddings
 import datetime
 from dateutil import parser
 
@@ -94,7 +94,7 @@ def get_category_products(product_category: str) -> list:
 def get_policies(input: str) -> str: 
     """retrieve the relevant policies for FAQ for the queries asked"""
 
-    embedding = create_openai_embeddings(input)
+    embedding = create_embeddings(input)
 
     result = cb_vector_search("main", "data", "data_fts", "embedding", embedding, ["text"])
     
