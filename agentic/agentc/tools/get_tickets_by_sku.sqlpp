@@ -8,8 +8,7 @@ input: >
     {
       "type": "object",
       "properties": {
-        "year": {  "type": "number" },
-        ""
+        "year": {  "type": "number" }
       }
     }
 
@@ -27,4 +26,4 @@ FROM `main`.`data`.`tickets`
 WHERE DATE_PART_STR(date, "year") = $year
 GROUP BY related_product
 ORDER BY ticket_count DESC
-Limit 2;
+Limit 5;
