@@ -62,6 +62,7 @@ class AgentState(TypedDict):
     defects: list
     
     tickets: list 
+    draft: str
     
     final_response: str 
     
@@ -95,34 +96,41 @@ class Agent:
 
     def take_action(self, state: AgentState):
         tool_calls = state['messages'][-1].tool_calls
-        results = []
+        
+        # initiate the tool message results
+        message_results = []
+        
+        # initiate the updated state dict 
+        res = {}
+        
         for t in tool_calls:
             print_success(f"\n\nBot is calling function: {t}\n\n")
             if not t['name'] in self.tools:      # check for bad tool name from LLM
                 print("\n ....bad tool name....")
                 result = "bad tool name, retry"  # instruct LLM to retry if bad
             else:
+                # invoke the tool function
                 tool_name = t['name']
-                
                 function_args = t["args"]
-                
-                # if tool_name == "calculate_refund_eligibility":
-                #     current_states = graph.get_state(config={"configurable": {"thread_id": thread_id}}).values 
-                    
-                #     if "order_date" in current_states and current_states["order_date"]:
-                #         function_args["order_date"] = current_states["order_date"]
-                
                 result = self.tools[tool_name].invoke(function_args)
+                
+                # update the state dict with the result
+                if tool_name == "defect_search":
+                    res['defects'] = result 
+                    
                 print_success(f"Function call completed with {tool_name}. Result: {result}")
             
-            results.append(ToolMessage(tool_call_id=t['id'], name=t['name'], content=str(result)))
+            message_results.append(ToolMessage(tool_call_id=t['id'], name=t['name'], content=str(result)))
+        
+        res['messages'] = message_results
+        
         print_success("Function call completed. Bot proceeding to the next step...")
-        return {'messages': results }   
-
+        return res
 
 
 # general support node 
 def general_support_node(state: AgentState):
+    
     print_bold("\n\nGeneral support agent bot is running...\n\n")
     
     tools = provider.get_tools_for(query="For general support agents", limit=4)
@@ -145,9 +153,9 @@ def general_support_node(state: AgentState):
     for pretty_msg in messages_dict:
         is_tool_message, function_name, json_data = parse_message(pretty_msg)
         
-        print(f"is_tool_message: {is_tool_message}")
-        print(f"function_name: {function_name}")
-        print(f"json_data: {json_data}")
+        if is_tool_message:
+            print(f"function_name: {function_name}")
+            print(f"json_data: {json_data}")
         
         # if is_tool_message:
         #     if function_name == "defect_search":
