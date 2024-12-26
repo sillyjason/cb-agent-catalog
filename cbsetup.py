@@ -127,9 +127,6 @@ def import_function(function_name):
     except Exception as e:
         print_error(f"Error importing function {function_name}: {str(e)}")
 
-import_function("process_refund_ticket")
-import_function("process_message")
-
 
 # setup fts index
 def import_fts_index(index_name):

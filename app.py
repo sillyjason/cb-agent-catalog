@@ -80,16 +80,6 @@ def handle_message(msg_to_process):
     })
 
 
-@app.route('/metadata_tag', methods=['POST'])
-def metadata_tag():
-    data = request.get_json()
-    message = data.get('message', '')
-   
-    type = tag_metadata(message)
-
-    return jsonify(type)
-
-
 @app.route('/receive_reply', methods=['POST'])
 def receive_reply():
     data = request.get_json()
@@ -100,23 +90,6 @@ def receive_reply():
     })
     
     return { "status": "success" }
-
-
-@app.route('/new_refund_ticket_notification', methods=['POST'])
-def new_refund_ticket_notification():
-    socketio.emit("new_refund_ticket_creation")
-    
-    return { "status": "success" }
-
-
-@app.route('/tickets')
-def tickets():
-    return render_template('tickets.html')
-
-
-@app.route('/messages')
-def messages():
-    return render_template('messages.html')
 
 
 if __name__ == '__main__':

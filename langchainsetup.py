@@ -200,8 +200,7 @@ builder.add_node("finalizer", content_finalizer_node)
 builder.set_entry_point("general_support")
 
 # parallel connections
-builder.add_edge("general_support", "refund")
-builder.add_edge("refund", "finalizer")
+builder.add_edge("general_support", "finalizer")
 
 # add memory and complie graph
 memory = SqliteSaver.from_conn_string(":memory:")
