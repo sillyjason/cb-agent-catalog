@@ -1,9 +1,8 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request
 from flask_socketio import SocketIO
 from dotenv import load_dotenv
 import datetime
 from couchbaseops import insert_doc, mutliple_subdoc_upsert, mutliple_subdoc_upsert
-from agentic.metadata_tag import tag_metadata
 from langchainsetup import run_agent_langgraph
 from sharedfunctions.print import print_error
 from langchain.memory import ChatMessageHistory
