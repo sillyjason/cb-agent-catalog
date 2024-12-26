@@ -125,17 +125,10 @@ class Agent:
 def general_support_node(state: AgentState):
     print_bold("\n\nGeneral support agent bot is running...\n\n")
     
-    tools = provider.get_tools_for(query="For general support agents to identify information relevant for further processing", limit=4)
-    # p = provider.get_prompt_for(query="Gather general information relevant to this message to pass down for further processing")
-    # system_prompt = langchain_core.messages.SystemMessage(content=p.prompt)
-
+    tools = provider.get_tools_for(query="For general support agents", limit=4)
+ 
     general_support_bot = Agent(agentc_model, tools, system=general_support_prompt)
 
-    # messages = [
-    #     SystemMessage(content=general_support_prompt), 
-    #     HumanMessage(content=state['message'])
-    # ]
-    
     messages = [
         SystemMessage(content=general_support_prompt), 
         HumanMessage(content=state['message'])
@@ -152,13 +145,16 @@ def general_support_node(state: AgentState):
     for pretty_msg in messages_dict:
         is_tool_message, function_name, json_data = parse_message(pretty_msg)
         
+        print(f"is_tool_message: {is_tool_message}")
+        print(f"function_name: {function_name}")
         print(f"json_data: {json_data}")
         
-        if is_tool_message:
-            if function_name == "retrieve_order_info":
-                state_to_update['order_id'] = json_data['order_id'] if json_data else None
-                state_to_update['order_data'] = json_data
-                state_to_update['order_date'] = json_data['order_date'] if json_data else None
+        # if is_tool_message:
+        #     if function_name == "defect_search":
+                
+                # state_to_update['order_id'] = json_data['order_id'] if json_data else None
+                # state_to_update['order_data'] = json_data
+                # state_to_update['order_date'] = json_data['order_date'] if json_data else None
     
     
     return state_to_update

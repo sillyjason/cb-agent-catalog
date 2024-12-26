@@ -2,7 +2,7 @@
 name: get_tickets_by_sku
 
 description: >
-    For general support agents to identify information relevant for further processing - summarize customer ticketks ordered by SKU
+    For general support agents - get customer ticketks aggregatation insights by product SKU
 
 input: >
     {

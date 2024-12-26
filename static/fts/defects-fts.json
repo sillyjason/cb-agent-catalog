@@ -33,6 +33,21 @@
           "dynamic": false,
           "enabled": true,
           "properties": {
+            "concatenate": {
+              "dynamic": false,
+              "enabled": true,
+              "fields": [
+                {
+                  "docvalues": true,
+                  "include_in_all": true,
+                  "include_term_vectors": true,
+                  "index": true,
+                  "name": "concatenate",
+                  "store": true,
+                  "type": "text"
+                }
+              ]
+            },
             "description": {
               "dynamic": false,
               "enabled": true,

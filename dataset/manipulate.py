@@ -15,12 +15,8 @@ def update_products_json(file_path):
     updated_issues = []
     for index, issue in enumerate(issues):
         # Remove the manufacturer and product_id fields
-        embedding = create_embeddings(issue['description'])
-        issue_id = f"issue_{index}"
-        issue['issue_id'] = issue_id
-        issue['description_embedding'] = embedding
-        issue['image_path'] = f"dataset/defect_images/{index}"
-
+        concatenate = f"{issue['issue_id'] } *** {issue['image_path']}  *** {issue['description']}" 
+        issue['concatenate'] = concatenate
         updated_issues.append(issue)
 
     with open(file_path, 'w') as file:

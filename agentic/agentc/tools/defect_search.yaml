@@ -10,7 +10,7 @@ name: defect_search
 # A description for the function bound to this tool.
 # This field is mandatory, and will be used in the docstring of a Python function.
 description: >
-  For general support agents to identify information relevant for further processing - search for matching items in the foudry defect database
+  For general support agents - search for matching defect items using semantic search, based on provided tags.
 
 # The inputs used to build a comparable representation for a semantic search.
 # Inputs are described using a JSON object that follows the JSON schema standard.
@@ -61,7 +61,7 @@ vector_search:
 
   # The text_field is the field name used in the tool output (i.e., the results).
   # In the future, we will support multi-field tool outputs for semantic search.
-  text_field: issue_id
+  text_field: concatenate
 
   # The embedding model used to generate the vector_field.
   # This embedding model field value is directly passed to sentence transformers.
