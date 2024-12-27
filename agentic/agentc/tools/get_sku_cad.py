@@ -1,10 +1,11 @@
 from agentc import tool
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 import requests
 
 
 class Sku(BaseModel):
-    sku_id: str
+    """The identifier of the SKU"""
+    sku_id: str = Field(description="SKU identifier") 
 
 
 @tool
