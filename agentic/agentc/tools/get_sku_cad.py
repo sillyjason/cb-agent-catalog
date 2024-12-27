@@ -11,10 +11,10 @@ class SKU(BaseModel):
 def get_sku_cad(sku: SKU, annotations={"engineering": "true"}) -> dict:
     """For general support agents - fetch CAD file in PLM system for a given SKU"""
     
-    sku_value = sku.sku  # Extract SKU from the model
+    # sku_value = sku.sku  # Extract SKU from the model
     
     # Define the URL for the REST API endpoint
-    url = f"http://localhost:5001/product/{sku_value}"
+    url = f"http://localhost:5001/product/ca-001"
     
     try:
         # Make the HTTP GET request to fetch the CAD file

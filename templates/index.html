@@ -146,6 +146,7 @@
 
         socket.on('response', function(msg) {
             console.log("received response,", msg)
+
             const { run_id, run_url, response } = msg;
             const message = response.final_response
 
