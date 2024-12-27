@@ -8,7 +8,7 @@ class SKU(BaseModel):
 
 
 @tool
-def get_sku_cad(sku: SKU, annotations={"engineering": "true"}) -> dict:
+def get_sku_cad(sku: SKU) -> dict:
     """For general support agents - fetch CAD file in PLM system for a given SKU"""
     
     # sku_value = sku.sku  # Extract SKU from the model
