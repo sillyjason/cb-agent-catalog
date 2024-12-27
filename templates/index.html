@@ -146,7 +146,8 @@
 
         socket.on('response', function(msg) {
             console.log("received response,", msg)
-            const { message, run_id, run_url } = msg;
+            const { run_id, run_url, response } = msg;
+            const message = response.final_response
 
             // $('#chatbox').append($('<p class="system-message"></p>').html(message.replace(/\n/g, '<br>')));
 

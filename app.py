@@ -74,9 +74,10 @@ def handle_message(msg_to_process):
     
     # emit response to client
     socketio.emit("response", {
-        "message": final_reply,
+        # "message": final_reply,
         "run_id": run_id,
-        "run_url": run_url
+        "run_url": run_url,
+        "response": response 
     })
 
 

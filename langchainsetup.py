@@ -231,8 +231,6 @@ graph = builder.compile(checkpointer=memory)
 
 # run the agent
 def run_agent_langgraph(message): 
-    current_time_millis = time.time() * 1000.0
-    
     with callbacks.collect_runs() as cb:
         response = graph.invoke(
             {"message": message},
