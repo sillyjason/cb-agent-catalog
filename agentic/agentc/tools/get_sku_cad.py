@@ -3,13 +3,13 @@ from pydantic import BaseModel, Field
 import requests
 
 
-class Sku(BaseModel):
+class SkuId(BaseModel):
     """The identifier of the SKU"""
     sku_id: str = Field(description="SKU identifier") 
 
 
 @tool
-def get_sku_cad(sku_obj: Sku) -> dict:
+def get_sku_cad(sku: SkuId) -> dict:
     """For general support agents - fetch CAD file in PLM system for a given SKU"""
     
     # sku_value = sku.sku  # Extract SKU from the model
