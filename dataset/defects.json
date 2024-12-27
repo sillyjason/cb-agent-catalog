@@ -388,8 +388,8 @@
             -0.12027499079704285,
             0.09696158021688461
         ],
-        "image_path": "static/images/defects_images/0.png",
-        "concatenate": "issue_0 *** static/images/defects_images/0.png  *** Microcracks observed on the surface of the wafer, potentially caused by thermal stress during the cooling process. These microcracks could lead to significant reliability issues in the final product, as they may propagate under mechanical or thermal stress during operation. Further analysis is required to determine the root cause and implement corrective actions to prevent recurrence."
+        "image_path": "./static/images/defects_images/0.png",
+        "concatenate": "issue_0 *** ./static/images/defects_images/0.png  *** Microcracks observed on the surface of the wafer, potentially caused by thermal stress during the cooling process. These microcracks could lead to significant reliability issues in the final product, as they may propagate under mechanical or thermal stress during operation. Further analysis is required to determine the root cause and implement corrective actions to prevent recurrence."
     },
     {
         "description": "Contamination detected on the photomask, leading to pattern distortion on the wafer. The contamination appears to be from airborne particles that settled on the photomask during the lithography process. This has resulted in incomplete or distorted patterns, which will affect the functionality of the integrated circuits. A thorough cleaning of the photomask and improved cleanroom protocols are necessary.",
@@ -780,8 +780,8 @@
             -0.16655784845352173,
             0.17655129730701447
         ],
-        "image_path": "static/images/defects_images/1.png",
-        "concatenate": "issue_1 *** static/images/defects_images/1.png  *** Contamination detected on the photomask, leading to pattern distortion on the wafer. The contamination appears to be from airborne particles that settled on the photomask during the lithography process. This has resulted in incomplete or distorted patterns, which will affect the functionality of the integrated circuits. A thorough cleaning of the photomask and improved cleanroom protocols are necessary."
+        "image_path": "./static/images/defects_images/1.png",
+        "concatenate": "issue_1 *** ./static/images/defects_images/1.png  *** Contamination detected on the photomask, leading to pattern distortion on the wafer. The contamination appears to be from airborne particles that settled on the photomask during the lithography process. This has resulted in incomplete or distorted patterns, which will affect the functionality of the integrated circuits. A thorough cleaning of the photomask and improved cleanroom protocols are necessary."
     },
     {
         "description": "Misalignment of the lithography pattern, resulting in incomplete circuit formation on the chip. The misalignment was caused by a calibration error in the stepper equipment, leading to shifts in the pattern overlay. This defect will cause electrical shorts or open circuits, rendering the affected chips non-functional. Recalibration of the equipment and additional alignment checks are required.",
@@ -1172,8 +1172,8 @@
             -0.174629345536232,
             0.07821394503116608
         ],
-        "image_path": "static/images/defects_images/2.png",
-        "concatenate": "issue_2 *** static/images/defects_images/2.png  *** Misalignment of the lithography pattern, resulting in incomplete circuit formation on the chip. The misalignment was caused by a calibration error in the stepper equipment, leading to shifts in the pattern overlay. This defect will cause electrical shorts or open circuits, rendering the affected chips non-functional. Recalibration of the equipment and additional alignment checks are required."
+        "image_path": "./static/images/defects_images/2.png",
+        "concatenate": "issue_2 *** ./static/images/defects_images/2.png  *** Misalignment of the lithography pattern, resulting in incomplete circuit formation on the chip. The misalignment was caused by a calibration error in the stepper equipment, leading to shifts in the pattern overlay. This defect will cause electrical shorts or open circuits, rendering the affected chips non-functional. Recalibration of the equipment and additional alignment checks are required."
     },
     {
         "description": "Excessive etching observed in the metal layer, causing open circuits in the interconnects. The etching process removed more material than intended, likely due to an over-etch condition or incorrect etchant concentration. This has resulted in breaks in the metal lines, which will disrupt signal transmission. Process parameters need to be reviewed and adjusted to ensure proper etching.",
@@ -1564,8 +1564,8 @@
             -0.10604589432477951,
             0.0627128928899765
         ],
-        "image_path": "static/images/defects_images/3.png",
-        "concatenate": "issue_3 *** static/images/defects_images/3.png  *** Excessive etching observed in the metal layer, causing open circuits in the interconnects. The etching process removed more material than intended, likely due to an over-etch condition or incorrect etchant concentration. This has resulted in breaks in the metal lines, which will disrupt signal transmission. Process parameters need to be reviewed and adjusted to ensure proper etching."
+        "image_path": "./static/images/defects_images/3.png",
+        "concatenate": "issue_3 *** ./static/images/defects_images/3.png  *** Excessive etching observed in the metal layer, causing open circuits in the interconnects. The etching process removed more material than intended, likely due to an over-etch condition or incorrect etchant concentration. This has resulted in breaks in the metal lines, which will disrupt signal transmission. Process parameters need to be reviewed and adjusted to ensure proper etching."
     },
     {
         "description": "Particle contamination found on the wafer surface, leading to short circuits between adjacent lines. The particles, likely originating from the handling equipment, have caused bridging between metal lines. This will result in electrical shorts and potential device failure. Enhanced particle control measures and regular equipment maintenance are necessary to mitigate this issue.",
@@ -1956,8 +1956,8 @@
             -0.06430114060640335,
             0.12676090002059937
         ],
-        "image_path": "static/images/defects_images/4.png",
-        "concatenate": "issue_4 *** static/images/defects_images/4.png  *** Particle contamination found on the wafer surface, leading to short circuits between adjacent lines. The particles, likely originating from the handling equipment, have caused bridging between metal lines. This will result in electrical shorts and potential device failure. Enhanced particle control measures and regular equipment maintenance are necessary to mitigate this issue."
+        "image_path": "./static/images/defects_images/4.png",
+        "concatenate": "issue_4 *** ./static/images/defects_images/4.png  *** Particle contamination found on the wafer surface, leading to short circuits between adjacent lines. The particles, likely originating from the handling equipment, have caused bridging between metal lines. This will result in electrical shorts and potential device failure. Enhanced particle control measures and regular equipment maintenance are necessary to mitigate this issue."
     },
     {
         "description": "Incomplete deposition of the dielectric layer, resulting in poor insulation between metal layers. The deposition process did not achieve the required thickness, possibly due to equipment malfunction or process drift. This will lead to increased leakage currents and potential breakdown of the dielectric. Process monitoring and equipment calibration are needed to ensure uniform deposition.",
@@ -2348,8 +2348,8 @@
             0.07319571822881699,
             0.1798258274793625
         ],
-        "image_path": "static/images/defects_images/5.png",
-        "concatenate": "issue_5 *** static/images/defects_images/5.png  *** Incomplete deposition of the dielectric layer, resulting in poor insulation between metal layers. The deposition process did not achieve the required thickness, possibly due to equipment malfunction or process drift. This will lead to increased leakage currents and potential breakdown of the dielectric. Process monitoring and equipment calibration are needed to ensure uniform deposition."
+        "image_path": "./static/images/defects_images/5.png",
+        "concatenate": "issue_5 *** ./static/images/defects_images/5.png  *** Incomplete deposition of the dielectric layer, resulting in poor insulation between metal layers. The deposition process did not achieve the required thickness, possibly due to equipment malfunction or process drift. This will lead to increased leakage currents and potential breakdown of the dielectric. Process monitoring and equipment calibration are needed to ensure uniform deposition."
     },
     {
         "description": "Voids detected in the solder bumps, potentially causing weak connections in the final assembly. The voids were likely introduced during the reflow process, where trapped gases did not escape. These voids can compromise the mechanical and electrical integrity of the solder joints. Process optimization and improved reflow profiles are required to minimize void formation.",
@@ -2740,8 +2740,8 @@
             -0.1526632159948349,
             0.2831120491027832
         ],
-        "image_path": "static/images/defects_images/6.png",
-        "concatenate": "issue_6 *** static/images/defects_images/6.png  *** Voids detected in the solder bumps, potentially causing weak connections in the final assembly. The voids were likely introduced during the reflow process, where trapped gases did not escape. These voids can compromise the mechanical and electrical integrity of the solder joints. Process optimization and improved reflow profiles are required to minimize void formation."
+        "image_path": "./static/images/defects_images/6.png",
+        "concatenate": "issue_6 *** ./static/images/defects_images/6.png  *** Voids detected in the solder bumps, potentially causing weak connections in the final assembly. The voids were likely introduced during the reflow process, where trapped gases did not escape. These voids can compromise the mechanical and electrical integrity of the solder joints. Process optimization and improved reflow profiles are required to minimize void formation."
     },
     {
         "description": "Delamination of the passivation layer, exposing the underlying metal and risking corrosion. The passivation layer has peeled away in certain areas, likely due to poor adhesion or thermal cycling. This exposes the metal to environmental factors, increasing the risk of corrosion and device failure. Adhesion promoters and optimized curing processes should be considered.",
@@ -3132,8 +3132,8 @@
             0.22712373733520508,
             0.27775606513023376
         ],
-        "image_path": "static/images/defects_images/7.png",
-        "concatenate": "issue_7 *** static/images/defects_images/7.png  *** Delamination of the passivation layer, exposing the underlying metal and risking corrosion. The passivation layer has peeled away in certain areas, likely due to poor adhesion or thermal cycling. This exposes the metal to environmental factors, increasing the risk of corrosion and device failure. Adhesion promoters and optimized curing processes should be considered."
+        "image_path": "./static/images/defects_images/7.png",
+        "concatenate": "issue_7 *** ./static/images/defects_images/7.png  *** Delamination of the passivation layer, exposing the underlying metal and risking corrosion. The passivation layer has peeled away in certain areas, likely due to poor adhesion or thermal cycling. This exposes the metal to environmental factors, increasing the risk of corrosion and device failure. Adhesion promoters and optimized curing processes should be considered."
     },
     {
         "description": "Non-uniform doping concentration, leading to variations in transistor performance across the wafer. The doping process did not achieve uniform distribution, resulting in inconsistent electrical characteristics. This will affect the overall performance and yield of the devices. Process adjustments and better control of doping parameters are necessary to achieve uniformity.",
@@ -3524,8 +3524,8 @@
             -0.1592056304216385,
             0.10883878916501999
         ],
-        "image_path": "static/images/defects_images/8.png",
-        "concatenate": "issue_8 *** static/images/defects_images/8.png  *** Non-uniform doping concentration, leading to variations in transistor performance across the wafer. The doping process did not achieve uniform distribution, resulting in inconsistent electrical characteristics. This will affect the overall performance and yield of the devices. Process adjustments and better control of doping parameters are necessary to achieve uniformity."
+        "image_path": "./static/images/defects_images/8.png",
+        "concatenate": "issue_8 *** ./static/images/defects_images/8.png  *** Non-uniform doping concentration, leading to variations in transistor performance across the wafer. The doping process did not achieve uniform distribution, resulting in inconsistent electrical characteristics. This will affect the overall performance and yield of the devices. Process adjustments and better control of doping parameters are necessary to achieve uniformity."
     },
     {
         "description": "Scratches on the wafer surface caused by improper handling during the manufacturing process. The scratches were introduced during wafer transport or loading/unloading from equipment. These mechanical defects can lead to stress concentration points and potential cracking. Improved handling procedures and the use of protective carriers are recommended to prevent such damage.",
@@ -3916,8 +3916,8 @@
             -0.045178964734077454,
             0.3377213776111603
         ],
-        "image_path": "static/images/defects_images/9.png",
-        "concatenate": "issue_9 *** static/images/defects_images/9.png  *** Scratches on the wafer surface caused by improper handling during the manufacturing process. The scratches were introduced during wafer transport or loading/unloading from equipment. These mechanical defects can lead to stress concentration points and potential cracking. Improved handling procedures and the use of protective carriers are recommended to prevent such damage."
+        "image_path": "./static/images/defects_images/9.png",
+        "concatenate": "issue_9 *** ./static/images/defects_images/9.png  *** Scratches on the wafer surface caused by improper handling during the manufacturing process. The scratches were introduced during wafer transport or loading/unloading from equipment. These mechanical defects can lead to stress concentration points and potential cracking. Improved handling procedures and the use of protective carriers are recommended to prevent such damage."
     },
     {
         "description": "Oxide layer thickness variation, affecting the electrical characteristics of the transistors. The oxide layer, which acts as the gate dielectric, shows significant thickness variation across the wafer. This will result in inconsistent threshold voltages and drive currents. Process control and uniformity checks are essential to maintain consistent oxide thickness.",
@@ -4308,8 +4308,8 @@
             -0.009671765379607677,
             -0.004683842882514
         ],
-        "image_path": "static/images/defects_images/10.png",
-        "concatenate": "issue_10 *** static/images/defects_images/10.png  *** Oxide layer thickness variation, affecting the electrical characteristics of the transistors. The oxide layer, which acts as the gate dielectric, shows significant thickness variation across the wafer. This will result in inconsistent threshold voltages and drive currents. Process control and uniformity checks are essential to maintain consistent oxide thickness."
+        "image_path": "./static/images/defects_images/10.png",
+        "concatenate": "issue_10 *** ./static/images/defects_images/10.png  *** Oxide layer thickness variation, affecting the electrical characteristics of the transistors. The oxide layer, which acts as the gate dielectric, shows significant thickness variation across the wafer. This will result in inconsistent threshold voltages and drive currents. Process control and uniformity checks are essential to maintain consistent oxide thickness."
     },
     {
         "description": "Residue from the cleaning process left on the wafer, causing contamination in subsequent steps. The cleaning process did not fully remove residues, which have now contaminated the wafer surface. This can lead to defects in subsequent layers and affect device performance. Enhanced cleaning protocols and thorough rinsing steps are required to ensure a contaminant-free surface.",
@@ -4700,8 +4700,8 @@
             0.09342174977064133,
             -0.014918823726475239
         ],
-        "image_path": "static/images/defects_images/11.png",
-        "concatenate": "issue_11 *** static/images/defects_images/11.png  *** Residue from the cleaning process left on the wafer, causing contamination in subsequent steps. The cleaning process did not fully remove residues, which have now contaminated the wafer surface. This can lead to defects in subsequent layers and affect device performance. Enhanced cleaning protocols and thorough rinsing steps are required to ensure a contaminant-free surface."
+        "image_path": "./static/images/defects_images/11.png",
+        "concatenate": "issue_11 *** ./static/images/defects_images/11.png  *** Residue from the cleaning process left on the wafer, causing contamination in subsequent steps. The cleaning process did not fully remove residues, which have now contaminated the wafer surface. This can lead to defects in subsequent layers and affect device performance. Enhanced cleaning protocols and thorough rinsing steps are required to ensure a contaminant-free surface."
     },
     {
         "description": "Cracks in the silicon substrate, potentially leading to device failure under mechanical stress. The cracks were likely introduced during wafer sawing or handling. These defects can propagate under stress, leading to catastrophic failure of the devices. Improved sawing techniques and careful handling are necessary to prevent substrate cracking.",
@@ -5092,8 +5092,8 @@
             0.07316722720861435,
             0.11034110933542252
         ],
-        "image_path": "static/images/defects_images/12.png",
-        "concatenate": "issue_12 *** static/images/defects_images/12.png  *** Cracks in the silicon substrate, potentially leading to device failure under mechanical stress. The cracks were likely introduced during wafer sawing or handling. These defects can propagate under stress, leading to catastrophic failure of the devices. Improved sawing techniques and careful handling are necessary to prevent substrate cracking."
+        "image_path": "./static/images/defects_images/12.png",
+        "concatenate": "issue_12 *** ./static/images/defects_images/12.png  *** Cracks in the silicon substrate, potentially leading to device failure under mechanical stress. The cracks were likely introduced during wafer sawing or handling. These defects can propagate under stress, leading to catastrophic failure of the devices. Improved sawing techniques and careful handling are necessary to prevent substrate cracking."
     },
     {
         "description": "Incomplete planarization of the wafer surface, resulting in uneven layers in the final device. The chemical mechanical polishing (CMP) process did not achieve a flat surface, leading to topographical variations. This will affect the uniformity of subsequent layers and device performance. Process optimization and better control of CMP parameters are required.",
@@ -5484,8 +5484,8 @@
             -0.07445763051509857,
             0.04227541759610176
         ],
-        "image_path": "static/images/defects_images/13.png",
-        "concatenate": "issue_13 *** static/images/defects_images/13.png  *** Incomplete planarization of the wafer surface, resulting in uneven layers in the final device. The chemical mechanical polishing (CMP) process did not achieve a flat surface, leading to topographical variations. This will affect the uniformity of subsequent layers and device performance. Process optimization and better control of CMP parameters are required."
+        "image_path": "./static/images/defects_images/13.png",
+        "concatenate": "issue_13 *** ./static/images/defects_images/13.png  *** Incomplete planarization of the wafer surface, resulting in uneven layers in the final device. The chemical mechanical polishing (CMP) process did not achieve a flat surface, leading to topographical variations. This will affect the uniformity of subsequent layers and device performance. Process optimization and better control of CMP parameters are required."
     },
     {
         "description": "Misalignment of the bonding pads, causing difficulties in wire bonding during packaging. The bonding pads are not properly aligned with the package leads, making wire bonding challenging. This can lead to poor electrical connections and reliability issues. Improved alignment techniques and regular equipment calibration are necessary to ensure proper pad placement.",
@@ -5876,8 +5876,8 @@
             -0.03458941727876663,
             -0.06726523488759995
         ],
-        "image_path": "static/images/defects_images/14.png",
-        "concatenate": "issue_14 *** static/images/defects_images/14.png  *** Misalignment of the bonding pads, causing difficulties in wire bonding during packaging. The bonding pads are not properly aligned with the package leads, making wire bonding challenging. This can lead to poor electrical connections and reliability issues. Improved alignment techniques and regular equipment calibration are necessary to ensure proper pad placement."
+        "image_path": "./static/images/defects_images/14.png",
+        "concatenate": "issue_14 *** ./static/images/defects_images/14.png  *** Misalignment of the bonding pads, causing difficulties in wire bonding during packaging. The bonding pads are not properly aligned with the package leads, making wire bonding challenging. This can lead to poor electrical connections and reliability issues. Improved alignment techniques and regular equipment calibration are necessary to ensure proper pad placement."
     },
     {
         "description": "Excessive moisture absorption in the dielectric layer, leading to increased leakage currents. The dielectric material has absorbed moisture, likely due to high humidity conditions during storage or processing. This will increase leakage currents and affect device reliability. Improved storage conditions and moisture barrier coatings are recommended to prevent moisture absorption.",
@@ -6268,8 +6268,8 @@
             -0.04347385838627815,
             0.37575197219848633
         ],
-        "image_path": "static/images/defects_images/15.png",
-        "concatenate": "issue_15 *** static/images/defects_images/15.png  *** Excessive moisture absorption in the dielectric layer, leading to increased leakage currents. The dielectric material has absorbed moisture, likely due to high humidity conditions during storage or processing. This will increase leakage currents and affect device reliability. Improved storage conditions and moisture barrier coatings are recommended to prevent moisture absorption."
+        "image_path": "./static/images/defects_images/15.png",
+        "concatenate": "issue_15 *** ./static/images/defects_images/15.png  *** Excessive moisture absorption in the dielectric layer, leading to increased leakage currents. The dielectric material has absorbed moisture, likely due to high humidity conditions during storage or processing. This will increase leakage currents and affect device reliability. Improved storage conditions and moisture barrier coatings are recommended to prevent moisture absorption."
     },
     {
         "description": "Defects in the gate oxide layer, causing reliability issues in the transistors. The gate oxide shows pinholes and other defects, which can lead to gate leakage and breakdown. These defects are likely due to contamination or process variations. Enhanced cleanroom protocols and tighter process control are necessary to produce defect-free gate oxides.",
@@ -6660,8 +6660,8 @@
             0.08108849823474884,
             -0.03535408154129982
         ],
-        "image_path": "static/images/defects_images/16.png",
-        "concatenate": "issue_16 *** static/images/defects_images/16.png  *** Defects in the gate oxide layer, causing reliability issues in the transistors. The gate oxide shows pinholes and other defects, which can lead to gate leakage and breakdown. These defects are likely due to contamination or process variations. Enhanced cleanroom protocols and tighter process control are necessary to produce defect-free gate oxides."
+        "image_path": "./static/images/defects_images/16.png",
+        "concatenate": "issue_16 *** ./static/images/defects_images/16.png  *** Defects in the gate oxide layer, causing reliability issues in the transistors. The gate oxide shows pinholes and other defects, which can lead to gate leakage and breakdown. These defects are likely due to contamination or process variations. Enhanced cleanroom protocols and tighter process control are necessary to produce defect-free gate oxides."
     },
     {
         "description": "Non-uniformity in the chemical mechanical polishing (CMP) process, affecting layer thickness. The CMP process has resulted in varying thicknesses across the wafer, leading to topographical variations. This will affect the uniformity of subsequent layers and device performance. Process optimization and better control of CMP parameters are required to achieve uniform planarization.",
@@ -7052,8 +7052,8 @@
             -0.10546457767486572,
             -0.17290730774402618
         ],
-        "image_path": "static/images/defects_images/17.png",
-        "concatenate": "issue_17 *** static/images/defects_images/17.png  *** Non-uniformity in the chemical mechanical polishing (CMP) process, affecting layer thickness. The CMP process has resulted in varying thicknesses across the wafer, leading to topographical variations. This will affect the uniformity of subsequent layers and device performance. Process optimization and better control of CMP parameters are required to achieve uniform planarization."
+        "image_path": "./static/images/defects_images/17.png",
+        "concatenate": "issue_17 *** ./static/images/defects_images/17.png  *** Non-uniformity in the chemical mechanical polishing (CMP) process, affecting layer thickness. The CMP process has resulted in varying thicknesses across the wafer, leading to topographical variations. This will affect the uniformity of subsequent layers and device performance. Process optimization and better control of CMP parameters are required to achieve uniform planarization."
     },
     {
         "description": "Contamination from the photoresist, leading to defects in the patterned layers. The photoresist used in the lithography process contained contaminants, which have transferred to the wafer. This has resulted in defects in the patterned layers, affecting device functionality. Improved photoresist handling and filtration are necessary to prevent contamination.",
@@ -7444,8 +7444,8 @@
             0.05847197398543358,
             0.13800223171710968
         ],
-        "image_path": "static/images/defects_images/18.png",
-        "concatenate": "issue_18 *** static/images/defects_images/18.png  *** Contamination from the photoresist, leading to defects in the patterned layers. The photoresist used in the lithography process contained contaminants, which have transferred to the wafer. This has resulted in defects in the patterned layers, affecting device functionality. Improved photoresist handling and filtration are necessary to prevent contamination."
+        "image_path": "./static/images/defects_images/18.png",
+        "concatenate": "issue_18 *** ./static/images/defects_images/18.png  *** Contamination from the photoresist, leading to defects in the patterned layers. The photoresist used in the lithography process contained contaminants, which have transferred to the wafer. This has resulted in defects in the patterned layers, affecting device functionality. Improved photoresist handling and filtration are necessary to prevent contamination."
     },
     {
         "description": "Incomplete removal of the sacrificial layer, causing defects in the final structure. The sacrificial layer, used during certain fabrication steps, was not fully removed. This has left residues that interfere with the final device structure. Enhanced etching or cleaning steps are required to ensure complete removal of sacrificial materials.",
@@ -7836,8 +7836,8 @@
             0.1989733725786209,
             -0.05799604952335358
         ],
-        "image_path": "static/images/defects_images/19.png",
-        "concatenate": "issue_19 *** static/images/defects_images/19.png  *** Incomplete removal of the sacrificial layer, causing defects in the final structure. The sacrificial layer, used during certain fabrication steps, was not fully removed. This has left residues that interfere with the final device structure. Enhanced etching or cleaning steps are required to ensure complete removal of sacrificial materials."
+        "image_path": "./static/images/defects_images/19.png",
+        "concatenate": "issue_19 *** ./static/images/defects_images/19.png  *** Incomplete removal of the sacrificial layer, causing defects in the final structure. The sacrificial layer, used during certain fabrication steps, was not fully removed. This has left residues that interfere with the final device structure. Enhanced etching or cleaning steps are required to ensure complete removal of sacrificial materials."
     },
     {
         "description": "Cracks in the passivation layer, exposing the underlying metal to environmental damage. The passivation layer, which protects the metal interconnects, shows cracks likely due to thermal cycling or mechanical stress. This exposes the metal to corrosion and other environmental damage. Improved passivation techniques and stress relief measures are necessary.",
@@ -8228,8 +8228,8 @@
             0.018118612468242645,
             0.2880859375
         ],
-        "image_path": "static/images/defects_images/20.png",
-        "concatenate": "issue_20 *** static/images/defects_images/20.png  *** Cracks in the passivation layer, exposing the underlying metal to environmental damage. The passivation layer, which protects the metal interconnects, shows cracks likely due to thermal cycling or mechanical stress. This exposes the metal to corrosion and other environmental damage. Improved passivation techniques and stress relief measures are necessary."
+        "image_path": "./static/images/defects_images/20.png",
+        "concatenate": "issue_20 *** ./static/images/defects_images/20.png  *** Cracks in the passivation layer, exposing the underlying metal to environmental damage. The passivation layer, which protects the metal interconnects, shows cracks likely due to thermal cycling or mechanical stress. This exposes the metal to corrosion and other environmental damage. Improved passivation techniques and stress relief measures are necessary."
     },
     {
         "description": "Non-uniform deposition of the metal layer, leading to variations in line width and resistance. The metal deposition process did not achieve uniform coverage, resulting in variations in line width and electrical resistance. This will affect signal integrity and device performance. Process adjustments and better control of deposition parameters are required.",
@@ -8620,8 +8620,8 @@
             0.035932477563619614,
             0.21489642560482025
         ],
-        "image_path": "static/images/defects_images/21.png",
-        "concatenate": "issue_21 *** static/images/defects_images/21.png  *** Non-uniform deposition of the metal layer, leading to variations in line width and resistance. The metal deposition process did not achieve uniform coverage, resulting in variations in line width and electrical resistance. This will affect signal integrity and device performance. Process adjustments and better control of deposition parameters are required."
+        "image_path": "./static/images/defects_images/21.png",
+        "concatenate": "issue_21 *** ./static/images/defects_images/21.png  *** Non-uniform deposition of the metal layer, leading to variations in line width and resistance. The metal deposition process did not achieve uniform coverage, resulting in variations in line width and electrical resistance. This will affect signal integrity and device performance. Process adjustments and better control of deposition parameters are required."
     },
     {
         "description": "Defects in the epitaxial layer, affecting the performance of the active devices. The epitaxial layer, which forms the active region of the devices, shows defects such as dislocations and stacking faults. These defects will degrade device performance and yield. Improved epitaxial growth techniques and defect reduction strategies are necessary.",
@@ -9012,8 +9012,8 @@
             0.027426881715655327,
             0.23589351773262024
         ],
-        "image_path": "static/images/defects_images/22.png",
-        "concatenate": "issue_22 *** static/images/defects_images/22.png  *** Defects in the epitaxial layer, affecting the performance of the active devices. The epitaxial layer, which forms the active region of the devices, shows defects such as dislocations and stacking faults. These defects will degrade device performance and yield. Improved epitaxial growth techniques and defect reduction strategies are necessary."
+        "image_path": "./static/images/defects_images/22.png",
+        "concatenate": "issue_22 *** ./static/images/defects_images/22.png  *** Defects in the epitaxial layer, affecting the performance of the active devices. The epitaxial layer, which forms the active region of the devices, shows defects such as dislocations and stacking faults. These defects will degrade device performance and yield. Improved epitaxial growth techniques and defect reduction strategies are necessary."
     },
     {
         "description": "Incomplete etching of the contact holes, causing poor electrical connections. The etching process did not fully open the contact holes, leading to poor electrical connections between layers. This will affect device functionality and reliability. Process optimization and better control of etching parameters are required to ensure complete contact hole formation.",
@@ -9404,8 +9404,8 @@
             0.018734045326709747,
             0.0632903128862381
         ],
-        "image_path": "static/images/defects_images/23.png",
-        "concatenate": "issue_23 *** static/images/defects_images/23.png  *** Incomplete etching of the contact holes, causing poor electrical connections. The etching process did not fully open the contact holes, leading to poor electrical connections between layers. This will affect device functionality and reliability. Process optimization and better control of etching parameters are required to ensure complete contact hole formation."
+        "image_path": "./static/images/defects_images/23.png",
+        "concatenate": "issue_23 *** ./static/images/defects_images/23.png  *** Incomplete etching of the contact holes, causing poor electrical connections. The etching process did not fully open the contact holes, leading to poor electrical connections between layers. This will affect device functionality and reliability. Process optimization and better control of etching parameters are required to ensure complete contact hole formation."
     },
     {
         "description": "Contamination from the sputtering process, leading to defects in the metal layers. The sputtering process introduced contaminants into the metal layers, affecting their purity and performance. This can lead to increased resistance and potential failure. Improved sputtering chamber cleanliness and process control are necessary to prevent contamination.",
@@ -9796,8 +9796,8 @@
             0.17153675854206085,
             0.3216343820095062
         ],
-        "image_path": "static/images/defects_images/24.png",
-        "concatenate": "issue_24 *** static/images/defects_images/24.png  *** Contamination from the sputtering process, leading to defects in the metal layers. The sputtering process introduced contaminants into the metal layers, affecting their purity and performance. This can lead to increased resistance and potential failure. Improved sputtering chamber cleanliness and process control are necessary to prevent contamination."
+        "image_path": "./static/images/defects_images/24.png",
+        "concatenate": "issue_24 *** ./static/images/defects_images/24.png  *** Contamination from the sputtering process, leading to defects in the metal layers. The sputtering process introduced contaminants into the metal layers, affecting their purity and performance. This can lead to increased resistance and potential failure. Improved sputtering chamber cleanliness and process control are necessary to prevent contamination."
     },
     {
         "description": "Non-uniform annealing, causing variations in dopant activation and device performance. The annealing process, used to activate dopants, did not achieve uniform temperature distribution. This has resulted in variations in dopant activation and inconsistent device performance. Improved annealing techniques and temperature control are required.",
@@ -10188,8 +10188,8 @@
             -0.1853426992893219,
             -0.022099560126662254
         ],
-        "image_path": "static/images/defects_images/25.png",
-        "concatenate": "issue_25 *** static/images/defects_images/25.png  *** Non-uniform annealing, causing variations in dopant activation and device performance. The annealing process, used to activate dopants, did not achieve uniform temperature distribution. This has resulted in variations in dopant activation and inconsistent device performance. Improved annealing techniques and temperature control are required."
+        "image_path": "./static/images/defects_images/25.png",
+        "concatenate": "issue_25 *** ./static/images/defects_images/25.png  *** Non-uniform annealing, causing variations in dopant activation and device performance. The annealing process, used to activate dopants, did not achieve uniform temperature distribution. This has resulted in variations in dopant activation and inconsistent device performance. Improved annealing techniques and temperature control are required."
     },
     {
         "description": "Defects in the isolation trenches, leading to leakage currents between adjacent devices. The isolation trenches, used to electrically isolate devices, show defects such as voids and cracks. This can lead to leakage currents and reduced device performance. Enhanced trench etching and filling techniques are necessary to produce defect-free isolation structures.",
@@ -10580,8 +10580,8 @@
             0.3063066899776459,
             -0.15057173371315002
         ],
-        "image_path": "static/images/defects_images/26.png",
-        "concatenate": "issue_26 *** static/images/defects_images/26.png  *** Defects in the isolation trenches, leading to leakage currents between adjacent devices. The isolation trenches, used to electrically isolate devices, show defects such as voids and cracks. This can lead to leakage currents and reduced device performance. Enhanced trench etching and filling techniques are necessary to produce defect-free isolation structures."
+        "image_path": "./static/images/defects_images/26.png",
+        "concatenate": "issue_26 *** ./static/images/defects_images/26.png  *** Defects in the isolation trenches, leading to leakage currents between adjacent devices. The isolation trenches, used to electrically isolate devices, show defects such as voids and cracks. This can lead to leakage currents and reduced device performance. Enhanced trench etching and filling techniques are necessary to produce defect-free isolation structures."
     },
     {
         "description": "Incomplete removal of the photoresist, causing defects in the subsequent layers. The photoresist, used during lithography, was not fully removed after patterning. This has left residues that interfere with subsequent processing steps. Improved photoresist stripping techniques and thorough cleaning are required to ensure complete removal.",
@@ -10972,8 +10972,8 @@
             -0.04443487897515297,
             0.19445358216762543
         ],
-        "image_path": "static/images/defects_images/27.png",
-        "concatenate": "issue_27 *** static/images/defects_images/27.png  *** Incomplete removal of the photoresist, causing defects in the subsequent layers. The photoresist, used during lithography, was not fully removed after patterning. This has left residues that interfere with subsequent processing steps. Improved photoresist stripping techniques and thorough cleaning are required to ensure complete removal."
+        "image_path": "./static/images/defects_images/27.png",
+        "concatenate": "issue_27 *** ./static/images/defects_images/27.png  *** Incomplete removal of the photoresist, causing defects in the subsequent layers. The photoresist, used during lithography, was not fully removed after patterning. This has left residues that interfere with subsequent processing steps. Improved photoresist stripping techniques and thorough cleaning are required to ensure complete removal."
     },
     {
         "description": "Cracks in the dielectric layer, potentially causing breakdown under high voltage. The dielectric layer, which insulates metal layers, shows cracks likely due to thermal stress or mechanical handling. These cracks can lead to dielectric breakdown and device failure. Improved dielectric deposition and stress relief measures are necessary to prevent cracking.",
@@ -11364,8 +11364,8 @@
             0.01534001249819994,
             0.14673011004924774
         ],
-        "image_path": "static/images/defects_images/28.png",
-        "concatenate": "issue_28 *** static/images/defects_images/28.png  *** Cracks in the dielectric layer, potentially causing breakdown under high voltage. The dielectric layer, which insulates metal layers, shows cracks likely due to thermal stress or mechanical handling. These cracks can lead to dielectric breakdown and device failure. Improved dielectric deposition and stress relief measures are necessary to prevent cracking."
+        "image_path": "./static/images/defects_images/28.png",
+        "concatenate": "issue_28 *** ./static/images/defects_images/28.png  *** Cracks in the dielectric layer, potentially causing breakdown under high voltage. The dielectric layer, which insulates metal layers, shows cracks likely due to thermal stress or mechanical handling. These cracks can lead to dielectric breakdown and device failure. Improved dielectric deposition and stress relief measures are necessary to prevent cracking."
     },
     {
         "description": "Non-uniform deposition of the barrier layer, affecting the reliability of the interconnects. The barrier layer, used to prevent metal diffusion, shows non-uniform thickness. This can lead to weak points and potential failure of the interconnects. Process optimization and better control of deposition parameters are required to achieve uniform barrier layers.",
@@ -11756,7 +11756,7 @@
             0.03450492396950722,
             0.22659574449062347
         ],
-        "image_path": "static/images/defects_images/29.png",
-        "concatenate": "issue_29 *** static/images/defects_images/29.png  *** Non-uniform deposition of the barrier layer, affecting the reliability of the interconnects. The barrier layer, used to prevent metal diffusion, shows non-uniform thickness. This can lead to weak points and potential failure of the interconnects. Process optimization and better control of deposition parameters are required to achieve uniform barrier layers."
+        "image_path": "./static/images/defects_images/29.png",
+        "concatenate": "issue_29 *** ./static/images/defects_images/29.png  *** Non-uniform deposition of the barrier layer, affecting the reliability of the interconnects. The barrier layer, used to prevent metal diffusion, shows non-uniform thickness. This can lead to weak points and potential failure of the interconnects. Process optimization and better control of deposition parameters are required to achieve uniform barrier layers."
     }
 ]

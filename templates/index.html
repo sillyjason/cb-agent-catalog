@@ -155,12 +155,34 @@
             $('#chatbox').append(cadHtml);
         }
 
+        function renderDefects(defects) {
+            if (defects.length === 0) return;
+
+            const defectsHtml = `
+                <div class="defects-container" style="margin-top: 20px; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                    <h2 style="margin-bottom: 20px;">Found below in defects archive</h2>
+                    <div class="defects-images" style="display: flex; justify-content: space-around;">
+                        ${defects.map(defect => {
+                            const [issue_id, issue_image_location, issue_description] = defect.split(' *** ');
+                            return `
+                                <div class="defect-item" style="text-align: center; flex: 1; margin: 0 10px;">
+                                    <img src="${issue_image_location}" alt="Defect Image" style="width: 100%; max-width: 200px; display: block; margin-bottom: 10px;">
+                                    <div style="font-weight: bold;">${issue_id}</div>
+                                    <div>${issue_description}</div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+            `;
+            $('#chatbox').append(defectsHtml);
+        }
 
         function renderMessage(msg) {
             console.log("received response,", msg)
 
             const { run_id, run_url, response } = msg;
-            const { final_response: message, cad } = response || {};
+            const { final_response: message, cad, defects } = response || {};
 
             // $('#chatbox').append($('<p class="system-message"></p>').html(message.replace(/\n/g, '<br>')));
 
@@ -176,9 +198,8 @@
             `;
             $('#chatbox').append(systemMessageHtml);
 
-            if (cad) {
-                renderCad(cad);
-            }
+            if (cad) { renderCad(cad) }
+            if (defects) { renderDefects(defects) }
 
             // add a text: "Trace: {run_id}" where run_id is a link to the run_url. the text should be clickable and the style is blue and underlined
             if (run_id && run_url) {
@@ -194,10 +215,13 @@
             const message_data = {
                 response: {
                     final_response: "Here is the CAD file you requested.",
-                    cad: {
-                        last_update: "2021-10-01 12:00:00",
-                        image_path: "./static/images/cad.png"
-                    }
+                    defects: [
+                        "issue_0 *** static/images/defects_images/0.png  *** Microcracks observed on the surface of the wafer, potentially caused by thermal stress during the cooling process. These microcracks could lead to significant reliability issues in the final product, as they may propagate under mechanical or thermal stress during operation. Further analysis is required to determine the root cause and implement corrective actions to prevent recurrence.", 
+
+                        "issue_3 *** static/images/defects_images/3.png  *** Excessive etching observed in the metal layer, causing open circuits in the interconnects. The etching process removed more material than intended, likely due to an over-etch condition or incorrect etchant concentration. This has resulted in breaks in the metal lines, which will disrupt signal transmission. Process parameters need to be reviewed and adjusted to ensure proper etching.", 
+
+                        "issue_19 *** static/images/defects_images/19.png  *** Incomplete removal of the sacrificial layer, causing defects in the final structure. The sacrificial layer, used during certain fabrication steps, was not fully removed. This has left residues that interfere with the final device structure. Enhanced etching or cleaning steps are required to ensure complete removal of sacrificial materials."
+                    ]
                 }
             };
 
@@ -205,7 +229,6 @@
             renderMessage(message_data);
         });
 
-        
         $('#send').click(function() {
             //send message to server
             var message = $('#message-input').val();
