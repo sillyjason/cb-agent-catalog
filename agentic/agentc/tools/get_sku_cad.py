@@ -16,6 +16,7 @@ def get_sku_cad(sku_obj: Sku) -> dict:
     # Define the URL for the REST API endpoint
     url = f"http://localhost:5001/product/ca-001"
     
+    
     try:
         # Make the HTTP GET request to fetch the CAD file
         response = requests.get(url)
