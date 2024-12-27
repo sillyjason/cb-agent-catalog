@@ -25,7 +25,7 @@
         "summary": "NPN Transistor 2N2222 overheating",
         "channel": "email",
         "details": "The 2N2222 transistor I bought is overheating even under low power conditions. Please advise.",
-        "related_product": "IC-005",
+        "related_product": "IC-001",
         "status": "Active",
         "resolved_date": null
     },
@@ -45,7 +45,7 @@
         "summary": "Temperature Sensor LM35 inaccurate readings",
         "channel": "email",
         "details": "The LM35 temperature sensor is giving inaccurate readings. The temperature values are fluctuating significantly.",
-        "related_product": "IC-005",
+        "related_product": "IC-001",
         "status": "Active",
         "resolved_date": null
     },
@@ -65,7 +65,7 @@
         "summary": "EEPROM 24LC256 data corruption",
         "channel": "email",
         "details": "The EEPROM 24LC256 is experiencing data corruption issues. Data written to the memory is not being retained.",
-        "related_product": "IC-005",
+        "related_product": "IC-001",
         "status": "Active",
         "resolved_date": null
     },
@@ -135,7 +135,7 @@
         "summary": "Red LED 5mm dim light",
         "channel": "website",
         "details": "The 5mm red LED is emitting a very dim light. It is not as bright as specified.",
-        "related_product": "IC-005",
+        "related_product": "IC-001",
         "status": "Resolved",
         "resolved_date": "2023-10-16"
     },
@@ -145,7 +145,7 @@
         "summary": "Temperature Sensor LM35 slow response",
         "channel": "email",
         "details": "The LM35 temperature sensor has a very slow response time. It takes too long to register temperature changes.",
-        "related_product": "IC-005",
+        "related_product": "IC-001",
         "status": "Active",
         "resolved_date": null
     },

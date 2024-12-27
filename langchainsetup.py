@@ -60,10 +60,11 @@ class AgentState(TypedDict):
     
     products: list
     defects: list
+    no_info_found: bool
     
-    tickets: list 
-    draft: str
+    cad: dict
     
+    tickets: list    
     final_response: str 
     
 class Agent:
@@ -111,12 +112,23 @@ class Agent:
             else:
                 # invoke the tool function
                 tool_name = t['name']
+                print(f"tool_name: {tool_name}")
                 function_args = t["args"]
                 result = self.tools[tool_name].invoke(function_args)
+                print(f"result: {result}")
                 
                 # update the state dict with the result
                 if tool_name == "defect_search":
                     res['defects'] = result 
+                
+                if tool_name == "get_products_details":
+                    res['products'] = result
+                
+                if tool_name == "get_tickets_by_sku":
+                    res['tickets'] = result
+                
+                if tool_name == "get_sku_cad":
+                    res['cad'] = result
                     
                 print_success(f"Function call completed with {tool_name}. Result: {result}")
             
@@ -124,6 +136,7 @@ class Agent:
         
         res['messages'] = message_results
         
+        print(f"res: {res}")    
         print_success("Function call completed. Bot proceeding to the next step...")
         return res
 
@@ -133,7 +146,7 @@ def general_support_node(state: AgentState):
     
     print_bold("\n\nGeneral support agent bot is running...\n\n")
     
-    tools = provider.get_tools_for(query="For general support agents", limit=4)
+    tools = provider.get_tools_for(query="For general support agents", limit=10)
  
     general_support_bot = Agent(agentc_model, tools, system=general_support_prompt)
 
@@ -144,26 +157,31 @@ def general_support_node(state: AgentState):
     
     # response = model.with_structured_output(GeneralSupportOutput).invoke(messages)
     response = general_support_bot.graph.invoke({"messages": messages})
-    content = response['messages'][-1].content
+    # print(f"response here: {response}")
     
-    messages_dict = [message.pretty_repr() for message in response['messages']]
+    # content = response['messages'][-1].content
     
-    state_to_update = { "draft": content }
+    # messages_dict = [message.pretty_repr() for message in response['messages']]
     
-    for pretty_msg in messages_dict:
-        is_tool_message, function_name, json_data = parse_message(pretty_msg)
+    state_to_update = {}
+    
+    if 'defects' in response:
+        state_to_update['defects'] = response['defects']
+    
+    if 'products' in response:
+        state_to_update['products'] = response['products']
         
-        if is_tool_message:
-            print(f"function_name: {function_name}")
-            print(f"json_data: {json_data}")
-        
-        # if is_tool_message:
-        #     if function_name == "defect_search":
-                
-                # state_to_update['order_id'] = json_data['order_id'] if json_data else None
-                # state_to_update['order_data'] = json_data
-                # state_to_update['order_date'] = json_data['order_date'] if json_data else None
+    if 'tickets' in response:
+        state_to_update['tickets'] = response['tickets']
     
+    if 'cad' in response:
+        state_to_update['cad'] = response['cad']
+    
+    # Check if none of the fields exist in the response
+    if all(field not in response for field in ['defects', 'products', 'tickets', 'cad']):
+        print("None of the fields 'defects', 'products', 'tickets', 'cad' exist in the response.")
+        state_to_update['no_info_found'] = True
+        # You can add additional logic here if needed
     
     return state_to_update
 

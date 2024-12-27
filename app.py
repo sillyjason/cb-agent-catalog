@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from flask_socketio import SocketIO
 from dotenv import load_dotenv
 import datetime
@@ -18,12 +18,13 @@ socketio = SocketIO(app)
 # initiate the chat history in memory
 demo_ephemeral_chat_history = ChatMessageHistory()
 
-
+# render the index.html template
 @app.route('/')
 def index():
     return render_template('index.html')
 
 
+# SocketIO event handler for new messages
 @socketio.on('message')
 def handle_message(msg_to_process):
     print_error(f'\n\nNew customer message! "{msg_to_process}"\n\n')
@@ -79,6 +80,7 @@ def handle_message(msg_to_process):
     })
 
 
+# API endpoint to receive reply from the agent for rendering
 @app.route('/receive_reply', methods=['POST'])
 def receive_reply():
     data = request.get_json()
@@ -89,6 +91,22 @@ def receive_reply():
     })
     
     return { "status": "success" }
+
+
+# API endpoint to get product details
+@app.route('/product/<sku>', methods=['GET'])
+def get_product_details(sku):
+    try:
+        # Fetch product details from Couchbase
+        res = { 
+            "image_path": "./static/images/cad.png",
+            "last_update": "2024-09-01T00:00:00" 
+            }
+        
+        return jsonify(res)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 404
+
 
 
 if __name__ == '__main__':
