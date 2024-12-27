@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, send_from_directory
 from flask_socketio import SocketIO
 from dotenv import load_dotenv
 import datetime
@@ -22,7 +22,6 @@ demo_ephemeral_chat_history = ChatMessageHistory()
 @app.route('/')
 def index():
     return render_template('index.html')
-
 
 # SocketIO event handler for new messages
 @socketio.on('message')

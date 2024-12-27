@@ -6,7 +6,6 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 
 import json
-from agentic.embedding import create_embeddings
 
 def update_products_json(file_path):
     with open(file_path, 'r') as file:
@@ -15,8 +14,10 @@ def update_products_json(file_path):
     updated_issues = []
     for index, issue in enumerate(issues):
         # Remove the manufacturer and product_id fields
-        concatenate = f"{issue['issue_id'] } *** {issue['image_path']}  *** {issue['description']}" 
+        updated_image_path = issue['image_path'] + ".png"
+        concatenate = f"{issue['issue_id'] } *** {updated_image_path}  *** {issue['description']}" 
         issue['concatenate'] = concatenate
+        issue['image_path'] = updated_image_path
         updated_issues.append(issue)
 
     with open(file_path, 'w') as file:
