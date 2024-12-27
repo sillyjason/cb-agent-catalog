@@ -9,7 +9,7 @@ class SkuId(BaseModel):
 
 
 @tool
-def get_sku_cad(sku: SkuId) -> dict:
+def get_sku_cad(sku: str) -> dict:
     """For general support agents - fetch CAD file in PLM system for a given SKU"""
     
     # sku_value = sku.sku  # Extract SKU from the model
