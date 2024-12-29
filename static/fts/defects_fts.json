@@ -1,6 +1,6 @@
 {
   "type": "fulltext-index",
-  "name": "defects-fts",
+  "name": "defects_fts",
   "sourceType": "gocbcore",
   "sourceName": "main",
   "planParams": {
