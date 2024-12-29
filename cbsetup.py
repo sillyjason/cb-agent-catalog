@@ -133,7 +133,7 @@ def import_fts_index(index_name):
     print(f"Importing fts index...")
     
     try:
-        url = f"http://{SEARCH_HOSTNAME}:8094/api/bucket/main/scope/data/index/data_fts"
+        url = f"http://{SEARCH_HOSTNAME}:8094/api/bucket/main/scope/data/index/defect_fts"
         with open(f'./static/fts/{index_name}.json', 'r') as file:
             data = json.load(file)
             requests.put(url, auth=(CB_USERNAME, CB_PASSWORD), json=data)

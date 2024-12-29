@@ -202,7 +202,7 @@ def content_finalizer_node(state: AgentState):
     print(f"final agent state: {state}")
     
     tools = provider.get_tools_for(name="get_products_details")
-    finalizer_bot = Agent(agentc_model, tools, system=content_finalizer_prompt)
+    finalizer_bot = Agent(agentc_model, tools)
       
     message = state.get("message") or ""
       
@@ -268,7 +268,7 @@ query_transform_prompt = ChatPromptTemplate.from_messages(
         MessagesPlaceholder(variable_name="messages"),
         (
             "user",
-            "Given the above conversation, generate a search query to look up in order to get information relevant to the conversation. Only respond with the query, nothing else.",
+            "Given the above conversation, rewrite the user question to be specific and clear.",
         ),
     ]
 )
