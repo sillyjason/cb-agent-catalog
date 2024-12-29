@@ -53,7 +53,7 @@ vector_search:
 
   # All semantic search operations require that a (FTS) vector index is built.
   # In the future, we will relax this constraint.
-  index: defects_fts
+  index: defect_fts
 
   # The vector_field refers to the field the vector index (above) was built on.
   # In the future, we will relax the constraint that an index exists on this field.

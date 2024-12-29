@@ -142,7 +142,7 @@ def import_fts_index(index_name):
     except Exception as e:
         print_error(f"Error importing fts index: {str(e)}")
 
-import_fts_index("defects_fts")
+import_fts_index("defect_fts")
 
 
 
