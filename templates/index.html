@@ -96,9 +96,6 @@
             flex-grow: 1;
             width: 80%;
         }
-        .timestamp {
-            margin-left: 10px;
-        }
 
         #send {
             font-size: 30px; /* Increase the size of the emoji */
@@ -110,12 +107,20 @@
         }
 
         /* Toggle switch styles */
-        .toggle-container {
-            display: flex;
-            align-items: center;
+        .top-right-container {
             position: absolute;
             top: 20px;
             right: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            /* position: absolute;
+            top: 20px;
+            right: 20px; */
         }
         .toggle-switch {
             position: relative;
@@ -184,24 +189,41 @@
         .toggle-icon.dimmed {
             opacity: 0.2;
         }
+
+        /* Loading spinner styles */
+        .loading-spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border-left-color: #09f;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
     </style>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    <div class="toggle-container">
-        <img src="{{ url_for('static', filename='icons/engineer.png') }}" alt="Icon 1" class="toggle-icon" id="engineer-icon">
-        <label class="toggle-switch">
-            <input type="checkbox" id="toggle-switch-input">
-            <span class="slider"></span>
-        </label>
-        <img src="{{ url_for('static', filename='icons/finance.png') }}" alt="Icon 2" class="toggle-icon" id="finance-icon">
+    <div class="top-right-container">
+        <div class="toggle-container">
+            <img src="{{ url_for('static', filename='icons/engineer.png') }}" alt="Icon 1" class="toggle-icon" id="engineer-icon">
+            <label class="toggle-switch">
+                <input type="checkbox" id="toggle-switch-input">
+                <span class="slider"></span>
+            </label>
+            <img src="{{ url_for('static', filename='icons/finance.png') }}" alt="Icon 2" class="toggle-icon" id="finance-icon">
+        </div>
+        <div id="toggle-text" style="font-size: larger; margin-left: 15px; margin-right: 10px;">Role: Engineer</div>
     </div>
     <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
-    <div id="header">🚀🧠🤖 Agentic Customer Support with Couchbase 🤖🧠🚀</div>
+    <div id="header">Agentic Engineer Training for UMC</div>
     <div id="chatbox"> </div>
     <div id="message-container">
         <input id="message-input" type="text" onkeydown="if(event.keyCode===13) document.getElementById('send').click()"> <!-- Updated -->
-        <button id="send">✉️</button>
+        <button id="send">📤</button>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.3.1/socket.io.js"></script>
@@ -209,6 +231,20 @@
     <script>
         var socket = io.connect('http://localhost:5001');
         var is_engineer = true;
+        var waiting_for_response = false;
+
+        function activateLoadingMode() {
+            waiting_for_response = true;
+
+            const loadingMessageHTML = `
+                <div id="loading" class="message system-message">
+                    <div class="loading-spinner"></div>
+                    <div style="margin-left: 20px; font-size: medium">Agentic system is fetching and generating the best answer for you..</div>
+                </div>
+            `;
+
+            $('#chatbox').append(loadingMessageHTML);
+        }
 
         function update_toggle_engineer_in_app() {
             is_engineer = !is_engineer
@@ -228,6 +264,7 @@
             const toggleSwitch = document.getElementById('toggle-switch-input');
             const engineerIcon = document.getElementById('engineer-icon');
             const financeIcon = document.getElementById('finance-icon');
+            const textDiv = document.getElementById('toggle-text');
 
             toggleSwitch.addEventListener('change', function() {
                 update_toggle_engineer_in_app();
@@ -235,10 +272,11 @@
                 if (toggleSwitch.checked) {
                     engineerIcon.classList.add('dimmed');
                     financeIcon.classList.remove('dimmed');
-
+                    textDiv.innerText = 'Role: Finance';
                 } else {
                     engineerIcon.classList.remove('dimmed');
                     financeIcon.classList.add('dimmed');
+                    textDiv.innerText = 'Role: Engineer';
                 }
             });
         });
@@ -283,20 +321,25 @@
             const { run_id, run_url, response } = msg;
             const { final_response: message, cad, defects } = response || {};
 
-            // $('#chatbox').append($('<p class="system-message"></p>').html(message.replace(/\n/g, '<br>')));
+            // remove the loading message
+            if (waiting_for_response) {
+                $('#loading').remove();
+                waiting_for_response = false;
+            }
 
+            // add the system message
             const systemMessageHtml = `
                 <div class="message system-message">
-                    <div class="circle">CS</div>
+                    <div class="circle">AI</div>
                     <div class="content">
-                        <div class="title">customer_support@greataicompany.io, Jason</div>
+                        <div class="title">training@umc</div>
                         <div>${message.replace(/\n/g, '<br>')}</div>
                     </div>
-                    <div class="timestamp">Just Now</div>
                 </div>
             `;
             $('#chatbox').append(systemMessageHtml);
 
+            // render the CAD and defects if available
             if (cad) { renderCad(cad) }
             if (defects) { renderDefects(defects) }
 
@@ -333,21 +376,26 @@
         $('#send').click(function() {
             //send message to server
             var message = $('#message-input').val();
+            
+            // reset the input field
             $('#message-input').val('');
-            // $('#chatbox').append('<p class="user-message">' + message + '</p>');
-         
+            
+            // add the user message
             const userMessageHtml = `
                 <div class="message user-message">
                     <div class="circle">C</div>
                     <div class="content">
-                        <div class="title">Jason, customer_support@greataicompany.io</div>
+                        <div class="title">Jason</div>
                         <div>${message}</div>
                     </div>
-                    <div class="timestamp">Just Now</div>
                 </div>
             `;
-
             $('#chatbox').append(userMessageHtml);
+
+            // add the loading message
+            activateLoadingMode();
+
+            // scroll to the bottom of the chatbox
             $('#chatbox').scrollTop($('#chatbox')[0].scrollHeight);
             
             socket.emit('message', {message: message});
