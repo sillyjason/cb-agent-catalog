@@ -11,7 +11,7 @@ input: >
         "year": {  "type": "number" }
       }
     }
-
+  
 secrets:
     - couchbase:
         conn_string: CB_CONN_STRING

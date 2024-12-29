@@ -102,6 +102,7 @@ werkzeug = "3.0.3"
 wsproto = "1.2.0"
 xattr = "1.1.0"
 yarl = "1.9.4"
+flask-cors = "^5.0.0"
 
 
 [build-system]

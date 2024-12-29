@@ -7,21 +7,36 @@ from langchainsetup import run_agent_langgraph
 from sharedfunctions.print import print_error
 from langchain.memory import ChatMessageHistory
 from langchainsetup import generate_query_transform_prompt
+from flask_cors import CORS
 
 # load the environment variables
 load_dotenv()
 
 # initiate the flask app and socketio
 app = Flask(__name__)
-socketio = SocketIO(app)
+CORS(app)  # Enable CORS for all routes
+socketio = SocketIO(app, cors_allowed_origins="*")
 
 # initiate the chat history in memory
 demo_ephemeral_chat_history = ChatMessageHistory()
+
+# initiate the chat model toggle
+engineer_mode = True
 
 # render the index.html template
 @app.route('/')
 def index():
     return render_template('index.html')
+
+
+# toggle between the engineer / finance mode 
+@app.route('/update_toggle_engineer', methods=['POST'])
+def update_toggle_engineer():
+    global engineer_mode
+    engineer_mode = request.json['value']
+    print(f"Engineer mode: {engineer_mode}")
+    return jsonify(success=True)
+
 
 # SocketIO event handler for new messages
 @socketio.on('message')
@@ -44,7 +59,7 @@ def handle_message(msg_to_process):
     message_id = insert_doc("main", "data", "messages", doc_to_insert)
 
     # run agent 
-    response, run_id, run_url = run_agent_langgraph(transformed_query)
+    response, run_id, run_url = run_agent_langgraph(transformed_query, engineer_mode)
     final_reply = response['final_response']
     
     # update chat history with the response

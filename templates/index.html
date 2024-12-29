@@ -3,22 +3,6 @@
 <html>
 <head>
     <style>
-        .top-right-links {
-            position: absolute;
-            top: 0;
-            right: 0;
-            padding: 20px;
-        }
-
-        .top-right-links a {
-            text-decoration: none;
-            color: #007bff; /* Bootstrap primary color for reference */
-            margin-left: 10px;
-        }
-
-        .top-right-links a:first-child {
-            margin-left: 0;
-        }
         body {
             display: flex;
             flex-direction: column;
@@ -124,13 +108,95 @@
             border-radius: 5px; /* Optional: round the corners of the button */
             width: 5%
         }
+
+        /* Toggle switch styles */
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        .toggle-switch {
+            position: relative;
+            width: 60px;
+            height: 34px;
+        }
+        .toggle-switch::before {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 24px;
+            height: 24px;
+            background-color: white;
+            border-radius: 50%;
+            transition: transform 0.3s;
+        }
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .toggle-switch.active {
+            background-color: lightblue;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        .toggle-icon {
+            width: 32px;
+            height: 32px;
+            margin: 0 10px;
+            opacity: 1;
+            transition: opacity 0.3s;
+        }
+        .toggle-icon.dimmed {
+            opacity: 0.2;
+        }
     </style>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    <div class="top-right-links">
-        <a href="http://localhost:5001/tickets">Tickets</a>
-        <a href="http://localhost:5001/messages">Messages</a>
+    <div class="toggle-container">
+        <img src="{{ url_for('static', filename='icons/engineer.png') }}" alt="Icon 1" class="toggle-icon" id="engineer-icon">
+        <label class="toggle-switch">
+            <input type="checkbox" id="toggle-switch-input">
+            <span class="slider"></span>
+        </label>
+        <img src="{{ url_for('static', filename='icons/finance.png') }}" alt="Icon 2" class="toggle-icon" id="finance-icon">
     </div>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
     <div id="header">🚀🧠🤖 Agentic Customer Support with Couchbase 🤖🧠🚀</div>
     <div id="chatbox"> </div>
     <div id="message-container">
@@ -142,7 +208,40 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
         var socket = io.connect('http://localhost:5001');
-        var lastTimestamp = null;
+        var is_engineer = true;
+
+        function update_toggle_engineer_in_app() {
+            is_engineer = !is_engineer
+
+            $.ajax({
+                url: '/update_toggle_engineer',
+                type: 'POST',
+                data: JSON.stringify({ 'value': is_engineer }),
+                contentType: 'application/json',
+                success: function(response) {
+                    console.log(response);
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleSwitch = document.getElementById('toggle-switch-input');
+            const engineerIcon = document.getElementById('engineer-icon');
+            const financeIcon = document.getElementById('finance-icon');
+
+            toggleSwitch.addEventListener('change', function() {
+                update_toggle_engineer_in_app();
+
+                if (toggleSwitch.checked) {
+                    engineerIcon.classList.add('dimmed');
+                    financeIcon.classList.remove('dimmed');
+
+                } else {
+                    engineerIcon.classList.remove('dimmed');
+                    financeIcon.classList.add('dimmed');
+                }
+            });
+        });
 
         function renderCad(cad) {
             const cadHtml = `
@@ -159,7 +258,7 @@
             if (defects.length === 0) return;
 
             const defectsHtml = `
-                <div class="defects-container" style="margin-top: 20px; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                <div class="defects-container" style="margin-top: 20px; margin-bottom: 20px; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
                     <h2 style="margin-bottom: 20px;">Found below in defects archive</h2>
                     <div class="defects-images" style="display: flex; justify-content: space-around;">
                         ${defects.map(defect => {
@@ -211,22 +310,24 @@
         socket.on('response', renderMessage);
 
         $(document).ready(function() {
+            const financeIcon = document.getElementById('finance-icon');
+            financeIcon.classList.add('dimmed');
             // Example CAD data
-            const message_data = {
-                response: {
-                    final_response: "Here is the CAD file you requested.",
-                    defects: [
-                        "issue_0 *** static/images/defects_images/0.png  *** Microcracks observed on the surface of the wafer, potentially caused by thermal stress during the cooling process. These microcracks could lead to significant reliability issues in the final product, as they may propagate under mechanical or thermal stress during operation. Further analysis is required to determine the root cause and implement corrective actions to prevent recurrence.", 
+            // const message_data = {
+            //     response: {
+            //         final_response: "Here is the CAD file you requested.",
+            //         defects: [
+            //             "issue_0 *** static/images/defects_images/0.png  *** Microcracks observed on the surface of the wafer, potentially caused by thermal stress during the cooling process. These microcracks could lead to significant reliability issues in the final product, as they may propagate under mechanical or thermal stress during operation. Further analysis is required to determine the root cause and implement corrective actions to prevent recurrence.", 
 
-                        "issue_3 *** static/images/defects_images/3.png  *** Excessive etching observed in the metal layer, causing open circuits in the interconnects. The etching process removed more material than intended, likely due to an over-etch condition or incorrect etchant concentration. This has resulted in breaks in the metal lines, which will disrupt signal transmission. Process parameters need to be reviewed and adjusted to ensure proper etching.", 
+            //             "issue_3 *** static/images/defects_images/3.png  *** Excessive etching observed in the metal layer, causing open circuits in the interconnects. The etching process removed more material than intended, likely due to an over-etch condition or incorrect etchant concentration. This has resulted in breaks in the metal lines, which will disrupt signal transmission. Process parameters need to be reviewed and adjusted to ensure proper etching.", 
 
-                        "issue_19 *** static/images/defects_images/19.png  *** Incomplete removal of the sacrificial layer, causing defects in the final structure. The sacrificial layer, used during certain fabrication steps, was not fully removed. This has left residues that interfere with the final device structure. Enhanced etching or cleaning steps are required to ensure complete removal of sacrificial materials."
-                    ]
-                }
-            };
+            //             "issue_19 *** static/images/defects_images/19.png  *** Incomplete removal of the sacrificial layer, causing defects in the final structure. The sacrificial layer, used during certain fabrication steps, was not fully removed. This has left residues that interfere with the final device structure. Enhanced etching or cleaning steps are required to ensure complete removal of sacrificial materials."
+            //         ]
+            //     }
+            // };
 
-            // Call renderCad function with example data
-            renderMessage(message_data);
+            // // Call renderCad function with example data
+            // renderMessage(message_data);
         });
 
         $('#send').click(function() {

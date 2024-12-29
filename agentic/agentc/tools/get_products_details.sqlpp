@@ -15,6 +15,10 @@ input: >
       }
     }
 
+annotations:
+  finance: "true"
+
+  
 secrets:
     - couchbase:
         conn_string: CB_CONN_STRING

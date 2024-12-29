@@ -30,8 +30,8 @@ input: >
 # As a supplement to the tool similarity search, users can optionally specify search annotations.
 # The values of these annotations MUST be strings (e.g., not 'true', but '"true"').
 # This field is optional, and does not have to be present.
-annotations:
-  engineering: "false"
+# annotations:
+#   engineer_mode: "false"
 
 
 # The "secrets" field defines search keys that will be used to query a "secrets" manager.

@@ -67,6 +67,8 @@ class AgentState(TypedDict):
     tickets: list    
     final_response: str 
     
+    engineer_mode: bool 
+    
 class Agent:
     def __init__(self, model, tools, system=""):
         self.system = system
@@ -146,7 +148,13 @@ def general_support_node(state: AgentState):
     
     print_bold("\n\nGeneral support agent bot is running...\n\n")
     
-    tools = provider.get_tools_for(query="For general support agents", limit=10)
+    # get the engineer mode from the state, and use it to determine what tools to use
+    engineer_mode = state.get("engineer_mode", True)
+    print(f"engineer_mode: {engineer_mode}")
+    annotations = None if engineer_mode else 'finance="true"' 
+    
+    tools = provider.get_tools_for(query="For general support agents", limit=10, annotations=annotations)
+    print(f"tools: {tools}")
  
     general_support_bot = Agent(agentc_model, tools, system=general_support_prompt)
 
@@ -230,10 +238,13 @@ graph = builder.compile(checkpointer=memory)
 
 
 # run the agent
-def run_agent_langgraph(message): 
+def run_agent_langgraph(message, engineer_mode): 
     with callbacks.collect_runs() as cb:
         response = graph.invoke(
-            {"message": message},
+            {
+                "message": message,
+                "engineer_mode": engineer_mode
+            },
             config={
                 "configurable": {"thread_id": thread_id}
             }
