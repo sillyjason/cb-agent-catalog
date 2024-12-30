@@ -29,5 +29,3 @@ content_finalizer_prompt = """
         {information_passed_down}
 """
 
-
-

@@ -107,6 +107,15 @@
         }
 
         /* Toggle switch styles */
+        .top-left-container {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        
         .top-right-container {
             position: absolute;
             top: 20px;
@@ -218,6 +227,15 @@
         </div>
         <div id="toggle-text" style="font-size: larger; margin-left: 15px; margin-right: 10px;">Role: Engineer</div>
     </div>
+    <div class="top-left-container">
+        <div class="toggle-container">
+            <label class="toggle-switch">
+                <input type="checkbox" id="toggle-switch-input-left">
+                <span class="slider"></span>
+            </label>
+        </div>
+        <div id="toggle-text-left" style="font-size: medium; margin-left: 15px; margin-right: 10px;">Agent Admin: OFF</div>
+    </div>
     <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
     <div id="header">Agentic Engineer Q&A for UMC</div>
     <div id="chatbox"> </div>
@@ -231,6 +249,7 @@
     <script>
         var socket = io.connect('http://localhost:5001');
         var is_engineer = true;
+        var admin_mode = false;
         var waiting_for_response = false;
 
         function activateLoadingMode() {
@@ -260,11 +279,27 @@
             });
         }
 
+        function update_toggle_admin_in_app() {
+            admin_mode = !admin_mode
+
+            $.ajax({
+                url: '/update_toggle_admin',
+                type: 'POST',
+                data: JSON.stringify({ 'value': admin_mode }),
+                contentType: 'application/json',
+                success: function(response) {
+                    console.log(response);
+                }
+            });
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             const toggleSwitch = document.getElementById('toggle-switch-input');
+            const adminToggleSwitch = document.getElementById('toggle-switch-input-left');
             const engineerIcon = document.getElementById('engineer-icon');
             const financeIcon = document.getElementById('finance-icon');
             const textDiv = document.getElementById('toggle-text');
+            const adminTextDiv = document.getElementById('toggle-text-left');
 
             toggleSwitch.addEventListener('change', function() {
                 update_toggle_engineer_in_app();
@@ -277,6 +312,16 @@
                     engineerIcon.classList.remove('dimmed');
                     financeIcon.classList.add('dimmed');
                     textDiv.innerText = 'Role: Engineer';
+                }
+            });
+
+            adminToggleSwitch.addEventListener('change', function() {
+                update_toggle_admin_in_app();
+
+                if (adminToggleSwitch.checked) {
+                    adminTextDiv.innerText = 'Agent Admin: ON';
+                } else {
+                    adminTextDiv.innerText = 'Agent Admin: OFF';
                 }
             });
         });
@@ -349,22 +394,8 @@
         $(document).ready(function() {
             const financeIcon = document.getElementById('finance-icon');
             financeIcon.classList.add('dimmed');
-            // Example CAD data
-            // const message_data = {
-            //     response: {
-            //         final_response: "Here is the CAD file you requested.",
-            //         defects: [
-            //             "issue_0 *** static/images/defects_images/0.png  *** Microcracks observed on the surface of the wafer, potentially caused by thermal stress during the cooling process. These microcracks could lead to significant reliability issues in the final product, as they may propagate under mechanical or thermal stress during operation. Further analysis is required to determine the root cause and implement corrective actions to prevent recurrence.", 
+            
 
-            //             "issue_3 *** static/images/defects_images/3.png  *** Excessive etching observed in the metal layer, causing open circuits in the interconnects. The etching process removed more material than intended, likely due to an over-etch condition or incorrect etchant concentration. This has resulted in breaks in the metal lines, which will disrupt signal transmission. Process parameters need to be reviewed and adjusted to ensure proper etching.", 
-
-            //             "issue_19 *** static/images/defects_images/19.png  *** Incomplete removal of the sacrificial layer, causing defects in the final structure. The sacrificial layer, used during certain fabrication steps, was not fully removed. This has left residues that interfere with the final device structure. Enhanced etching or cleaning steps are required to ensure complete removal of sacrificial materials."
-            //         ]
-            //     }
-            // };
-
-            // // Call renderCad function with example data
-            // renderMessage(message_data);
         });
 
         $('#send').click(function() {

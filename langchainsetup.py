@@ -56,14 +56,15 @@ class AgentState(TypedDict):
     
     products: list
     defects: list
-    no_info_found: bool
     
+    tools_invocations: dict 
     cad: dict
     
     tickets: list    
     final_response: str 
     
     engineer_mode: bool 
+    admin_mode: bool 
     
 class Agent:
     def __init__(self, model, tools, system=""):
@@ -127,6 +128,9 @@ class Agent:
                 
                 if tool_name == "get_sku_cad":
                     res['cad'] = result
+                
+                if tool_name == "summarize_tool_invocations":
+                    res['tools_invocations'] = result 
                     
                 print_success(f"Function call completed with {tool_name}. Result: {result}")
             
@@ -145,23 +149,35 @@ def general_support_node(state: AgentState):
     
     # get the engineer mode from the state, and use it to determine what tools to use
     engineer_mode = state.get("engineer_mode", True)
+    admin_mode = state.get("admin_mode", False)
     print_bold(f"engineer_mode: {engineer_mode}")
-    annotations = None if engineer_mode else 'finance="true"' 
+    print_bold(f"admin_mode: {admin_mode}")
     
+    # define annotation based on modes 
+    annotations = 'admin="true"' if admin_mode else None if engineer_mode else 'finance="true"' 
+    
+    # get tools from agentc provider 
     tools = provider.get_tools_for(query="For general support agents", limit=10, annotations=annotations)
+    
+    # print the tools information 
     print_bold(f"Found {len(tools)} tools:")
     for tool in tools:
         print(f"{tool.name}")
  
+    # define the general support bot 
     general_support_bot = Agent(agentc_model, tools, system=general_support_prompt)
 
+    # define messages passed into the bot 
     messages = [
         SystemMessage(content=general_support_prompt), 
         HumanMessage(content=state['message'])
     ]
     
+    # get response from langgraph
     response = general_support_bot.graph.invoke({"messages": messages})
     
+    
+    # update states from response 
     state_to_update = {}
     
     if 'defects' in response:
@@ -175,12 +191,9 @@ def general_support_node(state: AgentState):
     
     if 'cad' in response:
         state_to_update['cad'] = response['cad']
-    
-    # Check if none of the fields exist in the response
-    if all(field not in response for field in ['defects', 'products', 'tickets', 'cad']):
-        print("None of the fields 'defects', 'products', 'tickets', 'cad' exist in the response.")
-        state_to_update['no_info_found'] = True
-        # You can add additional logic here if needed
+        
+    if 'tools_invocations' in response: 
+        state_to_update['tools_invocations'] = response['tools_invocations']
     
     return state_to_update
 
@@ -229,13 +242,14 @@ graph = builder.compile(checkpointer=memory)
 
 
 # run the agent
-def run_agent_langgraph(message, engineer_mode): 
+def run_agent_langgraph(message, engineer_mode, admin_mode): 
     try: 
         with callbacks.collect_runs() as cb:
             response = graph.invoke(
                 {
                     "message": message,
-                    "engineer_mode": engineer_mode
+                    "engineer_mode": engineer_mode,
+                    "admin_mode": admin_mode
                 },
                 config={
                     "configurable": {"thread_id": thread_id}

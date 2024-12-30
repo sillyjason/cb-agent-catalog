@@ -23,6 +23,9 @@ demo_ephemeral_chat_history = ChatMessageHistory()
 # initiate the chat model toggle
 engineer_mode = True
 
+# initiate admin mode 
+admin_mode = False
+
 # render the index.html template
 @app.route('/')
 def index():
@@ -35,6 +38,15 @@ def update_toggle_engineer():
     global engineer_mode
     engineer_mode = request.json['value']
     print(f"Engineer mode: {engineer_mode}")
+    return jsonify(success=True)
+
+
+# toggle admin mode 
+@app.route('/update_toggle_admin', methods=['POST'])
+def update_toggle_admin():
+    global admin_mode
+    admin_mode = request.json['value']
+    print(f"Admin mode: {admin_mode}")
     return jsonify(success=True)
 
 
@@ -58,7 +70,7 @@ def handle_message(msg_to_process):
     message_id = insert_doc("main", "data", "messages", doc_to_insert)
 
     # run agent 
-    response = run_agent_langgraph(transformed_query, engineer_mode)
+    response = run_agent_langgraph(transformed_query, engineer_mode, admin_mode)
     final_reply = response['final_response']
     
     # update chat history with the response
