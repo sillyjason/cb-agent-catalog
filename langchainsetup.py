@@ -11,7 +11,7 @@ from langchain_core.output_parsers import JsonOutputParser
 from agentic.parser import parse_message
 import time 
 from langchain import callbacks
-from sharedfunctions.print import print_success, print_bold
+from sharedfunctions.print import print_success, print_bold, print_error
 import agentc.langchain
 import agentc
 import langchain_core.tools
@@ -149,8 +149,9 @@ def general_support_node(state: AgentState):
     annotations = None if engineer_mode else 'finance="true"' 
     
     tools = provider.get_tools_for(query="For general support agents", limit=10, annotations=annotations)
+    print_bold(f"Found {len(tools)} tools:")
     for tool in tools:
-        print(f"found tool: {tool.name}")
+        print(f"{tool.name}")
  
     general_support_bot = Agent(agentc_model, tools, system=general_support_prompt)
 
@@ -243,7 +244,7 @@ def run_agent_langgraph(message, engineer_mode):
             
             return response
     except Exception as e:
-        print(f"An error occurred running langgraph: {e}")
+        print_error(f"An error occurred running langgraph: {e}")
         return {
             'final_response': 'Oops an error occured. Ask Jason to work on his agentic development skills.'
         }
