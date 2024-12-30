@@ -5,7 +5,7 @@ import datetime
 from couchbaseops import insert_doc, mutliple_subdoc_upsert, mutliple_subdoc_upsert
 from langchainsetup import run_agent_langgraph
 from sharedfunctions.print import print_error
-from langchain.memory import ChatMessageHistory
+from langchain_community.chat_message_histories import ChatMessageHistory
 from langchainsetup import generate_query_transform_prompt
 from flask_cors import CORS
 
