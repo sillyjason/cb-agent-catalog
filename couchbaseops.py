@@ -96,6 +96,7 @@ def subdocument_upsert(bucket, scope, collection, doc_id, path, value):
         return None
     
 
+
 def subdocument_insert(bucket, scope, collection, doc_id, path, value):
     cb_collection = cluster.bucket(bucket).scope(scope).collection(collection)
     
