@@ -150,9 +150,10 @@ def general_support_node(state: AgentState):
     # get the engineer mode from the state, and use it to determine what tools to use
     engineer_mode = state.get("engineer_mode", True)
     admin_mode = state.get("admin_mode", False)
-    print_bold(f"engineer_mode: {engineer_mode}")
-    print_bold(f"admin_mode: {admin_mode}")
     
+    role = "ADMIN" if admin_mode else "ENGINEER" if engineer_mode else "FINANCE"
+    print_bold(f"engineer_mode: {engineer_mode}, admin_mode: {admin_mode}; role: {role}")
+  
     # define annotation based on modes 
     annotations = 'admin="true"' if admin_mode else 'engineer="true"' if engineer_mode else 'finance="true"' 
     
