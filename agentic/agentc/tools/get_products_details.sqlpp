@@ -17,6 +17,7 @@ input: >
 
 annotations:
   finance: "true"
+  engineer: "true"
 
   
 secrets:

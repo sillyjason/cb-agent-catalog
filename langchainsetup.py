@@ -154,7 +154,7 @@ def general_support_node(state: AgentState):
     print_bold(f"admin_mode: {admin_mode}")
     
     # define annotation based on modes 
-    annotations = 'admin="true"' if admin_mode else None if engineer_mode else 'finance="true"' 
+    annotations = 'admin="true"' if admin_mode else 'engineer="true"' if engineer_mode else 'finance="true"' 
     
     # get tools from agentc provider 
     tools = provider.get_tools_for(query="For general support agents", limit=10, annotations=annotations)

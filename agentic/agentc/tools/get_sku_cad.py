@@ -8,7 +8,7 @@ class SkuId(BaseModel):
     sku_id: str = Field(description="SKU identifier") 
 
 
-@tool
+@tool(annotations={"engineer": "true"})
 def get_sku_cad(sku: str) -> dict:
     """For general support agents - fetch CAD file in PLM system for a given SKU"""
     

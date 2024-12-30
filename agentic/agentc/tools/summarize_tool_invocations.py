@@ -47,9 +47,8 @@ def summarize_tool_invocations() -> dict:
         res = response.json()['results']
              
         tool_stats = analyze_tool_calls(res)
-        print(json.dumps(tool_stats, indent=4))
         
-        return response
+        return tool_stats
     except requests.exceptions.RequestException as e:
         return {"error": str(e)}
 

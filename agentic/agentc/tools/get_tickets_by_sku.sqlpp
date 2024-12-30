@@ -11,7 +11,12 @@ input: >
         "year": {  "type": "number" }
       }
     }
-  
+
+
+annotations:
+  finance: "true"
+  engineer: "true"
+
 secrets:
     - couchbase:
         conn_string: CB_CONN_STRING
