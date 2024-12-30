@@ -26,6 +26,7 @@ def get_sku_cad(sku: str) -> dict:
         # Parse the JSON response
         cad_data = response.json()
         
+        
         return cad_data
     except requests.exceptions.RequestException as e:
         return {"error": str(e)}
