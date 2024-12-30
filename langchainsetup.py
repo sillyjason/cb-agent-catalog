@@ -12,7 +12,6 @@ from agentic.parser import parse_message
 import time 
 from langchain import callbacks
 from sharedfunctions.print import print_success, print_bold
-from langsmith import traceable, Client 
 import agentc.langchain
 import agentc
 import langchain_core.tools
@@ -27,9 +26,6 @@ load_dotenv()
 
 # model initialization
 parser = JsonOutputParser()
-
-# initiate langsmith client
-langsmith_client = Client()
 
 # initiate the chat model
 model = ChatOpenAI(temperature=0, model="gpt-4o-2024-05-13")
@@ -138,7 +134,6 @@ class Agent:
         
         res['messages'] = message_results
         
-        print(f"res: {res}")    
         print_success("Function call completed. Bot proceeding to the next step...")
         return res
 
@@ -150,11 +145,12 @@ def general_support_node(state: AgentState):
     
     # get the engineer mode from the state, and use it to determine what tools to use
     engineer_mode = state.get("engineer_mode", True)
-    print(f"engineer_mode: {engineer_mode}")
+    print_bold(f"engineer_mode: {engineer_mode}")
     annotations = None if engineer_mode else 'finance="true"' 
     
     tools = provider.get_tools_for(query="For general support agents", limit=10, annotations=annotations)
-    print(f"tools: {tools}")
+    for tool in tools:
+        print(f"found tool: {tool.name}")
  
     general_support_bot = Agent(agentc_model, tools, system=general_support_prompt)
 
@@ -163,13 +159,7 @@ def general_support_node(state: AgentState):
         HumanMessage(content=state['message'])
     ]
     
-    # response = model.with_structured_output(GeneralSupportOutput).invoke(messages)
     response = general_support_bot.graph.invoke({"messages": messages})
-    # print(f"response here: {response}")
-    
-    # content = response['messages'][-1].content
-    
-    # messages_dict = [message.pretty_repr() for message in response['messages']]
     
     state_to_update = {}
     
@@ -239,24 +229,24 @@ graph = builder.compile(checkpointer=memory)
 
 # run the agent
 def run_agent_langgraph(message, engineer_mode): 
-    with callbacks.collect_runs() as cb:
-        response = graph.invoke(
-            {
-                "message": message,
-                "engineer_mode": engineer_mode
-            },
-            config={
-                "configurable": {"thread_id": thread_id}
-            }
-        )
- 
-        # get langsmith run id       
-        run_id = cb.traced_runs[0].id
-
-        # get the run and url 
-        run = langsmith_client.read_run(run_id)
-        
-        return response, run_id, run.url
+    try: 
+        with callbacks.collect_runs() as cb:
+            response = graph.invoke(
+                {
+                    "message": message,
+                    "engineer_mode": engineer_mode
+                },
+                config={
+                    "configurable": {"thread_id": thread_id}
+                }
+            )
+            
+            return response
+    except Exception as e:
+        print(f"An error occurred running langgraph: {e}")
+        return {
+            'final_response': 'Oops an error occured. Ask Jason to work on his agentic development skills.'
+        }
 
 
 

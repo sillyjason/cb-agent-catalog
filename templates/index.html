@@ -318,7 +318,7 @@
         function renderMessage(msg) {
             console.log("received response,", msg)
 
-            const { run_id, run_url, response } = msg;
+            const { response } = msg;
             const { final_response: message, cad, defects } = response || {};
 
             // remove the loading message
@@ -342,12 +342,6 @@
             // render the CAD and defects if available
             if (cad) { renderCad(cad) }
             if (defects) { renderDefects(defects) }
-
-            // add a text: "Trace: {run_id}" where run_id is a link to the run_url. the text should be clickable and the style is blue and underlined
-            // if (run_id && run_url) {
-            //     const trace = `Trace: <a href="${run_url}" style="color: blue; text-decoration: underline;" target="_blank">${run_id}</a>`;
-            //     $('#chatbox').append($('<p></p>').html(trace));
-            // }
         }
 
         socket.on('response', renderMessage);

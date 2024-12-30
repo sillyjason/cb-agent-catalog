@@ -43,7 +43,6 @@ def update_toggle_engineer():
 def handle_message(msg_to_process):
     print_error(f'\n\nNew customer message! "{msg_to_process}"\n\n')
     
-    
     # add user message to chat history
     demo_ephemeral_chat_history.add_user_message(msg_to_process['message'])
     
@@ -59,13 +58,11 @@ def handle_message(msg_to_process):
     message_id = insert_doc("main", "data", "messages", doc_to_insert)
 
     # run agent 
-    response, run_id, run_url = run_agent_langgraph(transformed_query, engineer_mode)
+    response = run_agent_langgraph(transformed_query, engineer_mode)
     final_reply = response['final_response']
     
     # update chat history with the response
     demo_ephemeral_chat_history.add_ai_message(final_reply)
-    
-    run_id = str(run_id)
     
     # insert into message_response collection
     message_response_doc = {
@@ -73,8 +70,6 @@ def handle_message(msg_to_process):
         "response": final_reply,
         "time_iso": datetime.datetime.now().isoformat(),  
         "time": datetime.datetime.now().timestamp(),
-        "run_id": run_id,
-        "run_url": run_url
     }
     
     message_response_id = insert_doc("main", "data", "message_responses", message_response_doc)
@@ -83,14 +78,10 @@ def handle_message(msg_to_process):
     mutliple_subdoc_upsert("main", "data", "messages", message_id, {
         "responded": True,
         "response_id": message_response_id,
-        "run_id": run_id
     })
     
     # emit response to client
     socketio.emit("response", {
-        # "message": final_reply,
-        "run_id": run_id,
-        "run_url": run_url,
         "response": response 
     })
 
