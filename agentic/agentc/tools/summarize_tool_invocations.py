@@ -1,7 +1,6 @@
 import json
 from collections import defaultdict
 from agentc import tool
-from pydantic import BaseModel, Field
 import requests
 from dotenv import load_dotenv
 import os 
@@ -51,4 +50,5 @@ def summarize_tool_invocations() -> dict:
         return tool_stats
     except requests.exceptions.RequestException as e:
         return {"error": str(e)}
+
 
