@@ -12,8 +12,6 @@ class SkuId(BaseModel):
 def get_sku_cad(sku: str) -> dict:
     """For general support agents - fetch CAD file in PLM system for a given SKU"""
     
-    # sku_value = sku.sku  # Extract SKU from the model. currently bug with declaring sku as SkuId
-    
     # Define the URL for the REST API endpoint
     url = f"http://localhost:5001/product/ca-001"
     
