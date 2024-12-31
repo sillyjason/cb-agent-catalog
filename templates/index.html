@@ -43,7 +43,7 @@
         }
         
         .system-message {
-            background-color: beige;
+            background-color: lightblue;
             box-shadow: 0 0 8px rgba(0, 0, 0, 0.1); /* Slight glow effect */
         }
 
@@ -51,10 +51,12 @@
             display: flex;
             justify-content: center;
             position: fixed;
-            bottom: 20px;
-            left: 5%;
-            right: 5%;
-            width: 90%;
+            bottom: 0px;
+            padding-bottom: 20px;
+            padding-top: 10px;
+            margin-left: 20px;
+            margin-right: 20px;
+            width: 93%;
         }
 
         .title {
@@ -68,6 +70,7 @@
             align-items: center;
             margin-bottom: 30px;
             padding: 15px;
+            border-radius: 10px;
         }
         
         #send {
@@ -225,7 +228,7 @@
             </label>
             <img src="{{ url_for('static', filename='icons/finance.png') }}" alt="Icon 2" class="toggle-icon" id="finance-icon">
         </div>
-        <div id="toggle-text" style="font-size: larger; margin-left: 15px; margin-right: 10px;">Role: Engineer</div>
+        <div id="toggle-text" style="font-size: medium; margin-left: 15px; margin-right: 10px;">Role: Engineer</div>
     </div>
     <div class="top-left-container">
         <div class="toggle-container">
@@ -237,7 +240,7 @@
         <div id="toggle-text-left" style="font-size: medium; margin-left: 15px; margin-right: 10px;">Agent Admin: OFF</div>
     </div>
     <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
-    <div id="header">Agentic Engineer Q&A for UMC</div>
+    <div id="header">Agentic Engineer Q&A</div>
     <div id="chatbox"> </div>
     <div id="message-container">
         <input id="message-input" type="text" onkeydown="if(event.keyCode===13) document.getElementById('send').click()"> <!-- Updated -->
