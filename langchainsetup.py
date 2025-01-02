@@ -165,7 +165,7 @@ def general_support_node(state: AgentState):
     for tool in tools:
         print(f"{tool.name}")
  
-    # define the general support bot 
+    # define general support bot 
     general_support_bot = Agent(agentc_model, tools, system=general_support_prompt)
 
     # define messages passed into the bot 
