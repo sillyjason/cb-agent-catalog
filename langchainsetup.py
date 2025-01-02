@@ -60,6 +60,8 @@ class AgentState(TypedDict):
     tools_invocations: dict 
     cad: dict
     
+    none_of_tools_invoked: bool
+    
     tickets: list    
     final_response: str 
     
@@ -181,20 +183,35 @@ def general_support_node(state: AgentState):
     # update states from response 
     state_to_update = {}
     
-    if 'defects' in response:
-        state_to_update['defects'] = response['defects']
+    print("initiating state update...")
     
-    if 'products' in response:
-        state_to_update['products'] = response['products']
-        
-    if 'tickets' in response:
-        state_to_update['tickets'] = response['tickets']
+    # if 'defects' in response:
+    #     state_to_update['defects'] = response['defects']
     
-    if 'cad' in response:
-        state_to_update['cad'] = response['cad']
+    # if 'products' in response:
+    #     state_to_update['products'] = response['products']
         
-    if 'tools_invocations' in response: 
-        state_to_update['tools_invocations'] = response['tools_invocations']
+    # if 'tickets' in response:
+    #     state_to_update['tickets'] = response['tickets']
+    
+    # if 'cad' in response:
+    #     state_to_update['cad'] = response['cad']
+        
+    # if 'tools_invocations' in response: 
+    #     state_to_update['tools_invocations'] = response['tools_invocations']
+        
+        
+    # update the state with the response
+    found_info = False 
+    for field in ['defects', 'products', 'tickets', 'cad', 'tools_invocations']:
+        if field in response: 
+            found_info = True 
+            print(f"updating state with {field}...")
+            state_to_update[field] = response[field]
+    
+    if not found_info:
+        state_to_update['none_of_tools_invoked'] = True
+        
     
     return state_to_update
 
