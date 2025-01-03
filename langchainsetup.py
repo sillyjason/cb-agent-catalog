@@ -41,6 +41,7 @@ provider = agentc.Provider(
     }
 )
 
+
 # noinspection SpellCheckingInspection
 auditor = agentc.Auditor(agent_name="jc-agent-with-tanvi", conn_string=os.getenv("AGENT_CATALOG_CONN_STRING"), username=os.getenv("AGENT_CATALOG_USERNAME"), password=os.getenv("AGENT_CATALOG_PASSWORD"), bucket=os.getenv("AGENT_CATALOG_BUCKET"))    
 agentc_model = agentc.langchain.audit(model, auditor=auditor, session=session)
