@@ -202,7 +202,6 @@ def general_support_node(state: AgentState):
     # if 'tools_invocations' in response: 
     #     state_to_update['tools_invocations'] = response['tools_invocations']
         
-        
     # update the state with the response
     found_info = False 
     for field in ['defects', 'products', 'tickets', 'cad', 'tools_invocations']:
