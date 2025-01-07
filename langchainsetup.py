@@ -154,6 +154,7 @@ def general_support_node(state: AgentState):
     engineer_mode = state.get("engineer_mode", True)
     admin_mode = state.get("admin_mode", False)
     
+    # determine the mode based on the engineer_mode and admin_mode
     role = "ADMIN" if admin_mode else "ENGINEER" if engineer_mode else "FINANCE"
     print_bold(f"engineer_mode: {engineer_mode}, admin_mode: {admin_mode}; role: {role}")
   

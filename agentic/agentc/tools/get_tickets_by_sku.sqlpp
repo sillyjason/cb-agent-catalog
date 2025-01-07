@@ -16,6 +16,8 @@ input: >
 annotations:
   finance: "true"
   engineer: "true"
+  engineer_12mm: "true"
+  engineer_8mm: "true"
 
 secrets:
     - couchbase:
