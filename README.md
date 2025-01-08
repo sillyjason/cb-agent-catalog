@@ -33,8 +33,4 @@ UNNEST OBJECT_PAIRS(annotations) AS annotation
 GROUP BY annotation.name AS annotation_key;
 
 
-SELECT a.version.timestamp
-FROM `audits`.`agent_catalog`.`tool_catalog` as a
-
-
 ## look at source code of "provider.get_tools_for"

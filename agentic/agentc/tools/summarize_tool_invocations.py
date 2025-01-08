@@ -5,6 +5,7 @@ import requests
 from dotenv import load_dotenv
 import os 
 
+
 # load the environment variables
 load_dotenv()
 
