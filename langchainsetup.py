@@ -178,6 +178,7 @@ def general_support_node(state: AgentState):
         HumanMessage(content=state['message'])
     ]
     
+    
     # get response from langgraph
     response = general_support_bot.graph.invoke({"messages": messages})
     
