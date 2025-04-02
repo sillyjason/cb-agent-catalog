@@ -1,5 +1,13 @@
 # setup 
 
+download and run the Couchbase image: https://hub.docker.com/_/couchbase
+
+make sure the python version is 3.12.7
+
+
+
+# setup the project 
+
 python3 cbsetup.py 
 
 python3 reindex.py 
